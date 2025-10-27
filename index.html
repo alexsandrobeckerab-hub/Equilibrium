@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilogia Equilibrium</title>
+    <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32?text=EQ">
+    <!-- Fontes Arial (padrão) e outras selecionadas para o tema -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Georgia&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores padrão */
+            --primary-color: #5a2c8a; /* Roxo principal */
+            --secondary-color: #3b1e5a; /* Roxo mais escuro */
+            --accent-color: #9c6cde; /* Roxo mais claro */
+            --text-color: #f0f0f0; /* Texto claro */
+            --gold-color: #ffcc00; /* Dourado */
+            --bg-color-main: #1a1a1a; /* Fundo escuro */
+            --bg-color-card: #2a2a2a; /* Fundo de card */
+            --hover-color: #7b4eb2; /* Cor de hover */
+            --heading-color: #ffffff; /* Cor de título */
+
+            /* Fontes padrão */
+            --font-family-body: 'Arial', sans-serif;
+            --font-family-headings: 'Arial', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family-body);
+            background-color: var(--bg-color-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-headings);
+            color: var(--heading-color);
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: var(--gold-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        header {
+            background-color: var(--bg-color-main);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: var(--font-family-headings);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .hero {
+            background-image: url('https://via.placeholder.com/1920x1080/0d0d0d/ffffff?text=Hero+Image'); /* Placeholder */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--gold-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--gold-color);
+        }
+
+        .trilogia-container {
+            display: flex;
+            flex-direction: column; /* For single book, stack elements */
+            align-items: center;
+            gap: 40px;
+        }
+
+        .book-card {
+            background-color: var(--bg-color-card);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px; /* Limit width for single book display */
+            text-align: center;
+            border: 1px solid var(--secondary-color);
+        }
+
+        .book-card img {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .book-card h3 {
+            font-size: 2rem;
+            color: var(--gold-color);
+            margin-bottom: 10px;
+        }
+
+        .book-card p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* Personagens */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .character-card {
+            background-color: var(--bg-color-card);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--secondary-color);
+            position: relative; /* For the delete button */
+        }
+
+        .character-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .character-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--gold-color);
+        }
+
+        .character-card p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Galerias */
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tabs button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .gallery-tabs button.active, .gallery-tabs button:hover {
+            background-color: var(--primary-color);
+            color: var(--gold-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background-color: var(--bg-color-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .gallery-item .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-item p {
+            padding: 15px;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .depoimento-card {
+            background-color: var(--bg-color-card);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: left;
+            border: 1px solid var(--secondary-color);
+            position: relative;
+        }
+
+        .depoimento-card p {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .depoimento-card strong {
+            display: block;
+            text-align: right;
+            font-size: 1.2rem;
+            color: var(--gold-color);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--primary-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-social-icons a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .footer-social-icons img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            filter: grayscale(100%) brightness(150%);
+            transition: filter 0.3s ease;
+        }
+
+        .footer-social-icons img:hover {
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .footer-contact {
+            margin-top: 20px;
+        }
+
+        .footer-contact a {
+            display: inline-block;
+            margin: 0 15px;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        .footer-contact a:hover {
+            color: var(--gold-color);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .admin-content {
+            background-color: var(--bg-color-main);
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 15px;
+        }
+
+        .admin-header h2 {
+            color: var(--gold-color);
+            margin: 0;
+        }
+
+        .admin-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .admin-tabs button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .admin-tabs button.active, .admin-tabs button:hover {
+            background-color: var(--primary-color);
+            color: var(--gold-color);
+        }
+
+        .admin-tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .admin-tab-content h3 {
+            color: var(--gold-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="file"],
+        .form-group textarea,
+        .form-group select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--secondary-color);
+            background-color: var(--bg-color-card);
+            color: var(--text-color);
+            font-family: var(--font-family-body);
+            font-size: 1rem;
+        }
+
+        .form-group input[type="color"] {
+            width: 80px;
+            height: 30px;
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--accent-color);
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-area:hover {
+            background-color: rgba(var(--accent-color), 0.1);
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .uploaded-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-color-card);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 1px solid var(--secondary-color);
+        }
+
+        .uploaded-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-right: 15px;
+        }
+        .uploaded-item .btn-delete {
+            background-color: #dc3545;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            color: white;
+        }
+        .admin-character-slot {
+            background-color: var(--bg-color-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--secondary-color);
+            text-align: left;
+            position: relative;
+        }
+        .admin-character-slot .character-preview-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid var(--primary-color);
+            display: block;
+            margin: 0 auto 15px;
+        }
+        .admin-character-slot .upload-area-char {
+            border: 1px dashed var(--accent-color);
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .admin-character-slot .upload-area-char:hover {
+            background-color: rgba(var(--accent-color), 0.1);
+        }
+        .admin-character-slot .btn-remove-slot {
+            background-color: #dc3545;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+        .admin-character-slots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .admin-testimonial-item {
+            background-color: var(--bg-color-card);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 1px solid var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-testimonial-item p {
+            margin: 0;
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--bg-color-main);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 1rem 0;
+                border-top: 1px solid var(--secondary-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            section h2 {
+                font-size: 2.2rem;
+            }
+
+            .trilogia-container {
+                flex-direction: column;
+            }
+            .admin-tabs {
+                flex-direction: column;
+            }
+            .admin-tabs button {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Trilogia Equilibrium</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#trilogia">Trilogia</a></li>
+                <li><a href="#personagens">Personagens</a></li>
+                <li><a href="#fotos">Fotos</a></li>
+                <li><a href="#videos">Vídeos</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+                <li><button class="btn" id="admin-btn">Admin</button></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1>Descubra o Universo Equilibrium</h1>
+            <p>Uma saga épica onde o destino da humanidade se equilibra na lâmina da esperança e da escuridão.</p>
+            <a href="#trilogia" class="btn">Conheça a Trilogia</a>
+        </section>
+
+        <section id="trilogia">
+            <h2 id="trilogia-title">A Trilogia</h2>
+            <div class="trilogia-container">
+                <div class="book-card">
+                    <img src="https://via.placeholder.com/300x450/0d0d0d/ffffff?text=Livro+1" alt="Capa do Livro 1">
+                    <h3 id="book1-title">Equilibrium: O Despertar</h3>
+                    <p id="book1-description">
+                        No primeiro volume da Trilogia Equilibrium, somos apresentados a Sunagori, uma jovem com poderes ocultos que se vê no centro de uma antiga profecia. Enquanto forças sombrias ameaçam a paz de seu mundo, ela deve desvendar os segredos de seu passado e dominar suas habilidades para proteger aqueles que ama. Uma jornada de autodescoberta, sacrifício e a luta eterna entre luz e escuridão.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="personagens">
+            <h2>Personagens</h2>
+            <div class="characters-grid" id="characters-display-grid">
+                <!-- Personagens serão carregados aqui via JS -->
+            </div>
+        </section>
+
+        <section id="fotos">
+            <h2>Galeria de Fotos</h2>
+            <div class="gallery-tabs">
+                <button class="gallery-filter-btn active" data-filter="all">Todos</button>
+                <button class="gallery-filter-btn" data-filter="cenas">Cenas</button>
+                <button class="gallery-filter-btn" data-filter="criaturas">Criaturas</button>
+                <button class="gallery-filter-btn" data-filter="lugares">Lugares</button>
+            </div>
+            <div class="gallery-grid" id="photo-gallery-grid">
+                <!-- Imagens serão carregadas aqui via JS -->
+            </div>
+        </section>
+
+        <section id="videos">
+            <h2>Galeria de Vídeos</h2>
+            <div class="gallery-tabs">
+                <button class="video-filter-btn active" data-filter="all">Todos</button>
+                <button class="video-filter-btn" data-filter="youtube">YouTube</button>
+                <button class="video-filter-btn" data-filter="tiktok">TikTok</button>
+            </div>
+            <div class="gallery-grid" id="video-gallery-grid">
+                <!-- Vídeos serão carregados aqui via JS -->
+            </div>
+        </section>
+
+        <section id="depoimentos">
+            <h2 id="depoimentos-title">O que os leitores estão dizendo</h2>
+            <div class="depoimentos-grid" id="testimonials-display-grid">
+                <!-- Depoimentos serão carregados aqui via JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Trilogia Equilibrium. Todos os direitos reservados.</p>
+            <div class="footer-contact">
+                <a href="mailto:contato@trilogiaequilibrium.com">contato@trilogiaequilibrium.com</a> | 
+                <a href="tel:+5511999999999">+55 (11) 99999-9999</a>
+            </div>
+            <div class="footer-social-icons">
+                <a href="https://instagram.com/seuperfil" target="_blank"><img src="https://via.placeholder.com/30x30/0d0d0d/ffffff?text=IG" alt="Instagram"></a>
+                <a href="https://tiktok.com/@seuperfil" target="_blank"><img src="https://via.placeholder.com/30x30/0d0d0d/ffffff?text=TK" alt="TikTok"></a>
+                <a href="https://facebook.com/seuperfil" target="_blank"><img src="https://via.placeholder.com/30x30/0d0d0d/ffffff?text=FB" alt="Facebook"></a>
+                <a href="https://twitter.com/seuperfil" target="_blank"><img src="https://via.placeholder.com/30x30/0d0d0d/ffffff?text=TW" alt="Twitter"></a>
+                <a href="https://linkedin.com/in/seuperfil" target="_blank"><img src="https://via.placeholder.com/30x30/0d0d0d/ffffff?text=LI" alt="LinkedIn"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="admin-panel">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h2>Painel Administrativo</h2>
+                <button class="btn" id="admin-close-btn">X</button>
+            </div>
+            
+            <div id="admin-login-area">
+                <h3>Login</h3>
+                <div class="form-group">
+                    <label for="admin-password">Senha:</label>
+                    <input type="password" id="admin-password" placeholder="Digite a senha">
+                </div>
+                <button class="btn" id="admin-login-btn">Entrar</button>
+                <p style="margin-top: 1rem; text-align: center; font-size: 0.9em; color: var(--text-color);">
+                    (A senha 'admin123' é apenas para protótipo. Não é segura para produção.)
+                </p>
+            </div>
+
+            <div id="admin-main-area" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" data-tab="admin-photos">Fotos</button>
+                    <button class="admin-tab-btn" data-tab="admin-videos">Vídeos</button>
+                    <button class="admin-tab-btn" data-tab="admin-trilogia">Trilogia</button>
+                    <button class="admin-tab-btn" data-tab="admin-personagens">Personagens</button>
+                    <button class="admin-tab-btn" data-tab="admin-depoimentos">Depoimentos</button>
+                    <button class="admin-tab-btn" data-tab="admin-settings">Configurações do Tema</button>
+                    <button class="btn logout-btn" id="admin-logout-btn-main">Sair</button>
+                </div>
+
+                <!-- Admin Tab: Fotos -->
+                <div id="admin-photos" class="admin-tab-content active">
+                    <h3>Gerenciar Fotos</h3>
+                    <div class="upload-area" id="photo-upload-area">
+                        <p>Arraste e solte fotos aqui ou clique para selecionar</p>
+                        <input type="file" id="photo-upload-input" accept="image/*" multiple>
+                    </div>
+                    <div id="uploaded-photos-list">
+                        <!-- Fotos enviadas serão listadas aqui -->
+                    </div>
+                    <button class="btn" id="save-photos-btn">Salvar Fotos</button>
+                </div>
+
+                <!-- Admin Tab: Vídeos -->
+                <div id="admin-videos" class="admin-tab-content">
+                    <h3>Gerenciar Vídeos</h3>
+                    <div class="form-group">
+                        <label for="video-url-input">URL do Vídeo (YouTube ou TikTok):</label>
+                        <input type="text" id="video-url-input" placeholder="Ex: https://www.youtube.com/watch?v=dQw4w9WgXcQ ou https://www.tiktok.com/@user/video/123456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="video-category-input">Categoria:</label>
+                        <select id="video-category-input">
+                            <option value="all">Todos</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="tiktok">TikTok</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="add-video-btn">Adicionar Vídeo</button>
+                    <div id="video-list" style="margin-top: 20px;">
+                        <!-- Vídeos serão listados aqui -->
+                    </div>
+                </div>
+
+                <!-- Admin Tab: Trilogia -->
+                <div id="admin-trilogia" class="admin-tab-content">
+                    <h3>Gerenciar Seção Trilogia</h3>
+                    <div class="form-group">
+                        <label for="trilogia-section-title">Título da Seção:</label>
+                        <input type="text" id="trilogia-section-title">
+                    </div>
+                    <div class="form-group">
+                        <label for="book1-admin-title">Título do Livro 1:</label>
+                        <input type="text" id="book1-admin-title">
+                    </div>
+                    <div class="form-group">
+                        <label for="book1-admin-description">Descrição do Livro 1:</label>
+                        <textarea id="book1-admin-description" rows="5"></textarea>
+                    </div>
+                    <button class="btn" id="save-trilogia-btn">Salvar Alterações da Trilogia</button>
+                </div>
+
+                <!-- Admin Tab: Personagens -->
+                <div id="admin-personagens" class="admin-tab-content">
+                    <h3>Gerenciar Personagens</h3>
+                    <div id="admin-character-slots-container">
+                        <!-- Slots de personagens serão carregados/gerados aqui -->
+                    </div>
+                    <button class="btn" id="add-character-slot-btn" style="margin-top: 20px;">Adicionar Slot de Personagem</button>
+                    <button class="btn" id="save-characters-btn" style="margin-top: 20px; margin-left: 10px;">Salvar Personagens</button>
+                </div>
+
+                <!-- Admin Tab: Depoimentos -->
+                <div id="admin-depoimentos" class="admin-tab-content">
+                    <h3>Gerenciar Depoimentos</h3>
+                    <div class="form-group">
+                        <label for="depoimentos-section-title">Título da Seção:</label>
+                        <input type="text" id="depoimentos-section-title">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-testimonial-text">Texto do Depoimento:</label>
+                        <textarea id="new-testimonial-text" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-testimonial-author">Autor do Depoimento:</label>
+                        <input type="text" id="new-testimonial-author">
+                    </div>
+                    <button class="btn" id="add-testimonial-btn">Adicionar Depoimento</button>
+                    <div id="testimonials-admin-list" style="margin-top: 20px;">
+                        <!-- Depoimentos serão listados aqui -->
+                    </div>
+                </div>
+
+                <!-- Admin Tab: Configurações do Tema -->
+                <div id="admin-settings" class="admin-tab-content">
+                    <h3>Configurações do Tema</h3>
+                    <div class="form-group">
+                        <label for="font-body-select">Fonte do Corpo do Texto:</label>
+                        <select id="font-body-select">
+                            <option value="'Arial', sans-serif">Arial</option>
+                            <option value="'Roboto', sans-serif">Roboto</option>
+                            <option value="'Open Sans', sans-serif">Open Sans</option>
+                            <option value="'Georgia', serif">Georgia</option>
+                            <option value="'EB Garamond', serif">EB Garamond Medium</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="font-headings-select">Fonte dos Títulos:</label>
+                        <select id="font-headings-select">
+                            <option value="'Arial', sans-serif">Arial</option>
+                            <option value="'Roboto', sans-serif">Roboto</option>
+                            <option value="'Open Sans', sans-serif">Open Sans</option>
+                            <option value="'Georgia', serif">Georgia</option>
+                            <option value="'EB Garamond', serif">EB Garamond Medium</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; border-top: 1px solid var(--secondary-color); padding-top: 20px;">
+                        <div class="form-group">
+                            <label for="primary-color-input">Cor Primária:</label>
+                            <input type="color" id="primary-color-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="secondary-color-input">Cor Secundária:</label>
+                            <input type="color" id="secondary-color-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="accent-color-input">Cor de Acentuação:</label>
+                            <input type="color" id="accent-color-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="text-color-input">Cor do Texto:</label>
+                            <input type="color" id="text-color-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="gold-color-input">Cor Dourada:</label>
+                            <input type="color" id="gold-color-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="bg-color-main-input">Cor de Fundo Principal:</label>
+                            <input type="color" id="bg-color-main-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="bg-color-card-input">Cor de Fundo do Card:</label>
+                            <input type="color" id="bg-color-card-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="hover-color-input">Cor de Hover:</label>
+                            <input type="color" id="hover-color-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="heading-color-input">Cor dos Títulos:</label>
+                            <input type="color" id="heading-color-input">
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <button class="btn" id="save-theme-btn">Salvar Tema</button>
+                        <button class="btn" id="restore-default-theme-btn" style="background-color: #6c757d; margin-left: 10px;">Restaurar Padrão</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+
+    <script>
+        // Firebase Configuration (YOUR CREDENTIALS)
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-o0hS692HW7F_13p8cPPS8TWfkIPf90c",
+            authDomain: "equilibrium-alex-2.firebaseapp.com",
+            databaseURL: "https://equilibrium-alex-2-default-rtdb.firebaseio.com",
+            projectId: "equilibrium-alex-2",
+            storageBucket: "equilibrium-alex-2.firebasestorage.app",
+            messagingSenderId: "684128804738",
+            appId: "1:684128804738:web:a9ba266b2a53d82bc7799b"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+        const storageRef = storage.ref();
+
+        // --- UI Elements ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const adminBtn = document.getElementById('admin-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        const adminCloseBtn = document.getElementById('admin-close-btn');
+        const adminLoginArea = document.getElementById('admin-login-area');
+        const adminMainArea = document.getElementById('admin-main-area');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const adminLogoutBtnMain = document.getElementById('admin-logout-btn-main');
+
+        // Admin Tabs
+        const adminTabButtons = document.querySelectorAll('.admin-tab-btn');
+        const adminTabContents = document.querySelectorAll('.admin-tab-content');
+
+        // Theme Settings Elements
+        const fontBodySelect = document.getElementById('font-body-select');
+        const fontHeadingsSelect = document.getElementById('font-headings-select');
+        const colorInputs = {
+            primary: document.getElementById('primary-color-input'),
+            secondary: document.getElementById('secondary-color-input'),
+            accent: document.getElementById('accent-color-input'),
+            text: document.getElementById('text-color-input'),
+            gold: document.getElementById('gold-color-input'),
+            bgMain: document.getElementById('bg-color-main-input'),
+            bgCard: document.getElementById('bg-color-card-input'),
+            hover: document.getElementById('hover-color-input'),
+            heading: document.getElementById('heading-color-input')
+        };
+        const saveThemeBtn = document.getElementById('save-theme-btn');
+        const restoreDefaultThemeBtn = document.getElementById('restore-default-theme-btn');
+
+        // Trilogia Elements
+        const trilogiaSectionTitle = document.getElementById('trilogia-title');
+        const book1DisplayTitle = document.getElementById('book1-title');
+        const book1DisplayDescription = document.getElementById('book1-description');
+        const adminTrilogiaSectionTitle = document.getElementById('trilogia-section-title');
+        const adminBook1Title = document.getElementById('book1-admin-title');
+        const adminBook1Description = document.getElementById('book1-admin-description');
+        const saveTrilogiaBtn = document.getElementById('save-trilogia-btn');
+
+        // Photo Upload Elements
+        const photoUploadArea = document.getElementById('photo-upload-area');
+        const photoUploadInput = document.getElementById('photo-upload-input');
+        const uploadedPhotosList = document.getElementById('uploaded-photos-list');
+        const savePhotosBtn = document.getElementById('save-photos-btn');
+        const photoGalleryGrid = document.getElementById('photo-gallery-grid');
+        const galleryFilterButtons = document.querySelectorAll('.gallery-filter-btn');
+
+        // Video Elements
+        const videoUrlInput = document.getElementById('video-url-input');
+        const videoCategoryInput = document.getElementById('video-category-input');
+        const addVideoBtn = document.getElementById('add-video-btn');
+        const videoList = document.getElementById('video-list');
+        const videoGalleryGrid = document.getElementById('video-gallery-grid');
+        const videoFilterButtons = document.querySelectorAll('.video-filter-btn');
+
+        // Character Elements
+        const charactersDisplayGrid = document.getElementById('characters-display-grid');
+        const adminCharacterSlotsContainer = document.getElementById('admin-character-slots-container');
+        const addCharacterSlotBtn = document.getElementById('add-character-slot-btn');
+        const saveCharactersBtn = document.getElementById('save-characters-btn');
+        let characterSlots = []; // To hold current state of admin character slots
+
+        // Testimonial Elements
+        const depoimentosSectionTitle = document.getElementById('depoimentos-title');
+        const testimonialsDisplayGrid = document.getElementById('testimonials-display-grid');
+        const adminDepoimentosSectionTitle = document.getElementById('depoimentos-section-title');
+        const newTestimonialText = document.getElementById('new-testimonial-text');
+        const newTestimonialAuthor = document.getElementById('new-testimonial-author');
+        const addTestimonialBtn = document.getElementById('add-testimonial-btn');
+        const testimonialsAdminList = document.getElementById('testimonials-admin-list');
+
+        let firebaseUser = null;
+
+        // --- Default Theme Colors (for restore option) ---
+        const defaultColors = {
+            primary: '#5a2c8a',
+            secondary: '#3b1e5a',
+            accent: '#9c6cde',
+            text: '#f0f0f0',
+            gold: '#ffcc00',
+            bgMain: '#1a1a1a',
+            bgCard: '#2a2a2a',
+            hover: '#7b4eb2',
+            heading: '#ffffff'
+        };
+        const defaultFonts = {
+            body: "'Arial', sans-serif",
+            headings: "'Arial', sans-serif"
+        };
+
+
+        // --- Functions ---
+
+        // Toggle mobile navigation
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Admin Panel Login/Logout
+        adminBtn.addEventListener('click', () => {
+            adminPanel.style.display = 'block';
+            if (firebaseUser) {
+                adminLoginArea.style.display = 'none';
+                adminMainArea.style.display = 'block';
+            } else {
+                adminLoginArea.style.display = 'block';
+                adminMainArea.style.display = 'none';
+            }
+        });
+
+        adminCloseBtn.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+        });
+
+        adminLoginBtn.addEventListener('click', () => {
+            const password = adminPasswordInput.value;
+            // Simplified admin login for prototype. In production, use email/password from Firebase Auth.
+            if (password === 'admin123') { // Hardcoded password for prototype
+                // Use anonymous sign-in or a specific admin account
+                auth.signInAnonymously()
+                    .then((userCredential) => {
+                        firebaseUser = userCredential.user;
+                        adminLoginArea.style.display = 'none';
+                        adminMainArea.style.display = 'block';
+                        adminPasswordInput.value = '';
+                        loadAdminData(); // Load data for admin panel
+                        alert('Login Admin successful!');
+                    })
+                    .catch((error) => {
+                        console.error('Anonymous sign-in error:', error);
+                        alert('Login failed. Error: ' + error.message);
+                    });
+            } else {
+                alert('Senha incorreta!');
+            }
+        });
+
+        adminLogoutBtnMain.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                firebaseUser = null;
+                adminLoginArea.style.display = 'block';
+                adminMainArea.style.display = 'none';
+                alert('Logout Admin successful!');
+            }).catch((error) => {
+                console.error('Logout error:', error);
+            });
+        });
+
+        // Admin Tab Switching
+        adminTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                adminTabButtons.forEach(btn => btn.classList.remove('active'));
+                adminTabContents.forEach(content => content.classList.remove('active'));
+                
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+
+        // --- Theme System ---
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            for (const key in theme.colors) {
+                root.style.setProperty(`--${key}-color`, theme.colors[key]);
+            }
+            root.style.setProperty('--font-family-body', theme.fonts.body);
+            root.style.setProperty('--font-family-headings', theme.fonts.headings);
+        }
+
+        function loadTheme() {
+            database.ref('theme').once('value', (snapshot) => {
+                const theme = snapshot.val();
+                if (theme) {
+                    applyTheme(theme);
+                    // Update admin panel color pickers and font selectors
+                    for (const key in colorInputs) {
+                        colorInputs[key].value = theme.colors[key];
+                    }
+                    fontBodySelect.value = theme.fonts.body;
+                    fontHeadingsSelect.value = theme.fonts.headings;
+                } else {
+                    applyTheme({ colors: defaultColors, fonts: defaultFonts });
+                    // Set admin panel to default values
+                    for (const key in colorInputs) {
+                        colorInputs[key].value = defaultColors[key];
+                    }
+                    fontBodySelect.value = defaultFonts.body;
+                    fontHeadingsSelect.value = defaultFonts.headings;
+                }
+            });
+        }
+
+        function saveTheme() {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para salvar o tema.');
+                return;
+            }
+
+            const newTheme = {
+                colors: {},
+                fonts: {
+                    body: fontBodySelect.value,
+                    headings: fontHeadingsSelect.value
+                }
+            };
+            for (const key in colorInputs) {
+                newTheme.colors[key] = colorInputs[key].value;
+            }
+
+            database.ref('theme').set(newTheme)
+                .then(() => {
+                    applyTheme(newTheme);
+                    alert('Tema salvo com sucesso!');
+                })
+                .catch((error) => {
+                    console.error('Erro ao salvar tema:', error);
+                    alert('Erro ao salvar tema.');
+                });
+        }
+
+        function restoreDefaultTheme() {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para restaurar o tema.');
+                return;
+            }
+            database.ref('theme').remove()
+                .then(() => {
+                    applyTheme({ colors: defaultColors, fonts: defaultFonts });
+                    // Update admin panel color pickers and font selectors to default
+                    for (const key in colorInputs) {
+                        colorInputs[key].value = defaultColors[key];
+                    }
+                    fontBodySelect.value = defaultFonts.body;
+                    fontHeadingsSelect.value = defaultFonts.headings;
+                    alert('Tema restaurado para o padrão!');
+                })
+                .catch((error) => {
+                    console.error('Erro ao restaurar tema:', error);
+                    alert('Erro ao restaurar tema.');
+                });
+        }
+
+        // Live preview for theme changes
+        for (const key in colorInputs) {
+            colorInputs[key].addEventListener('input', (e) => {
+                document.documentElement.style.setProperty(`--${key}-color`, e.target.value);
+            });
+        }
+        fontBodySelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--font-family-body', e.target.value);
+        });
+        fontHeadingsSelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--font-family-headings', e.target.value);
+        });
+
+        saveThemeBtn.addEventListener('click', saveTheme);
+        restoreDefaultThemeBtn.addEventListener('click', restoreDefaultTheme);
+
+        // --- Trilogia Section Functions ---
+        function loadTrilogiaData() {
+            database.ref('trilogia').once('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    
+                } else {
+                    // Set default values in admin if no data
+                    adminTrilogiaSectionTitle.value = 'A Trilogia';
+                    adminBook1Title.value = 'Equilibrium: O Despertar';
+                    adminBook1Description.value = 'No primeiro volume da Trilogia Equilibrium, somos apresentados a Sunagori, uma jovem com poderes ocultos que se vê no centro de uma antiga profecia. Enquanto forças sombrias ameaçam a paz de seu mundo, ela deve desvendar os segredos de seu passado e dominar suas habilidades para proteger aqueles que ama. Uma jornada de autodescoberta, sacrifício e a luta eterna entre luz e escuridão.';
+                }
+            });
+        }
+
+        saveTrilogiaBtn.addEventListener('click', () => {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para salvar as informações da trilogia.');
+                return;
+            }
+            const data = {
+                sectionTitle: adminTrilogiaSectionTitle.value,
+                book1: {
+                    title: adminBook1Title.value,
+                    description: adminBook1Description.value
+                }
+            };
+            database.ref('trilogia').set(data)
+                .then(() => {
+                    alert('Informações da Trilogia salvas com sucesso!');
+                    loadTrilogiaData(); // Reload to update UI
+                })
+                .catch((error) => {
+                    console.error('Erro ao salvar trilogia:', error);
+                    alert('Erro ao salvar informações da trilogia.');
+                });
+        });
+
+        // --- Photo Gallery Functions ---
+        let currentPhotoUploads = [];
+
+        photoUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            photoUploadArea.style.backgroundColor = 'rgba(156, 108, 222, 0.2)'; // accent-color with alpha
+        });
+
+        photoUploadArea.addEventListener('dragleave', () => {
+            photoUploadArea.style.backgroundColor = 'transparent';
+        });
+
+        photoUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            photoUploadArea.style.backgroundColor = 'transparent';
+            const files = e.dataTransfer.files;
+            handlePhotoFiles(files);
+        });
+
+        photoUploadArea.addEventListener('click', () => {
+            photoUploadInput.click();
+        });
+
+        photoUploadInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            handlePhotoFiles(files);
+        });
+
+        function handlePhotoFiles(files) {
+            for (const file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const fileData = { file, preview: e.target.result };
+                        currentPhotoUploads.push(fileData);
+                        renderUploadedPhotos();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        function renderUploadedPhotos() {
+            uploadedPhotosList.innerHTML = '';
+            currentPhotoUploads.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.classList.add('uploaded-item');
+                div.innerHTML = `
+                    <img src="${item.preview}" alt="Preview">
+                    <span>${item.file.name}</span>
+                    <button class="btn-delete" data-index="${index}">Remover</button>
+                `;
+                uploadedPhotosList.appendChild(div);
+            });
+
+            uploadedPhotosList.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    currentPhotoUploads.splice(index, 1);
+                    renderUploadedPhotos();
+                });
+            });
+        }
+
+        savePhotosBtn.addEventListener('click', async () => {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para enviar fotos.');
+                return;
+            }
+            if (currentPhotoUploads.length === 0) {
+                alert('Nenhuma foto para enviar.');
+                return;
+            }
+
+            alert('Enviando fotos, por favor aguarde...');
+            const uploadedImageUrls = [];
+            for (const item of currentPhotoUploads) {
+                const fileRef = storageRef.child(`photos/${Date.now()}-${item.file.name}`);
+                try {
+                    const snapshot = await fileRef.put(item.file);
+                    const url = await snapshot.ref.getDownloadURL();
+                    uploadedImageUrls.push({ url, category: 'all' }); // Default category 'all'
+                } catch (error) {
+                    console.error('Erro ao enviar foto:', error);
+                    alert(`Erro ao enviar foto: ${item.file.name}`);
+                }
+            }
+
+            database.ref('photos').push(uploadedImageUrls)
+                .then(() => {
+                    alert('Fotos enviadas e salvas com sucesso!');
+                    currentPhotoUploads = [];
+                    renderUploadedPhotos();
+                    loadPhotos(); // Reload gallery
+                })
+                .catch((error) => {
+                    console.error('Erro ao salvar URLs das fotos:', error);
+                    alert('Erro ao salvar URLs das fotos.');
+                });
+        });
+
+        function loadPhotos() {
+            database.ref('photos').on('value', (snapshot) => {
+                photoGalleryGrid.innerHTML = '';
+                const photos = snapshot.val();
+                if (photos) {
+                    Object.values(photos).forEach(batch => {
+                        if (Array.isArray(batch)) { // Handle array batch uploads
+                            batch.forEach(photo => renderPhotoItem(photo.url, photo.category));
+                        } else { // Handle single object uploads (legacy or if structure changes)
+                             renderPhotoItem(batch.url, batch.category);
+                        }
+                    });
+                }
+            });
+        }
+
+        function renderPhotoItem(url, category) {
+            const div = document.createElement('div');
+            div.classList.add('gallery-item');
+            div.dataset.category = category;
+            div.innerHTML = `<img src="${url}" alt="Galeria Imagem">`;
+            photoGalleryGrid.appendChild(div);
+        }
+
+        galleryFilterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                galleryFilterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                photoGalleryGrid.querySelectorAll('.gallery-item').forEach(item => {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- Video Gallery Functions ---
+        function addVideo() {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para adicionar vídeos.');
+                return;
+            }
+            const url = videoUrlInput.value.trim();
+            const category = videoCategoryInput.value;
+            if (!url) {
+                alert('Por favor, insira uma URL de vídeo.');
+                return;
+            }
+
+            let embedUrl = '';
+            let videoType = '';
+
+            // YouTube
+            if (youtubeMatch && youtubeMatch[1]) {
+                embedUrl = `https://www.youtube.com/embed/${youtubeMatch[1]}`;
+                videoType = 'youtube';
+            }
+
+            // TikTok
+            const tiktokMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com\/@[\w.]+\/video\/(\d+))|(?:\S+\/)?(vm\.tiktok\.com\/[\w-]+)/);
+            if (tiktokMatch) {
+                // TikTok embed usually requires special handling or a specific API.
+                // For simplicity, we'll use a generic iframe for now, but a proper solution
+                // would involve the TikTok Embed SDK or a server-side solution.
+                // A common approach for direct embed is to use embed.ly or similar services.
+                // For now, we'll just embed the original URL, which often doesn't work directly
+                // but we can try to derive a share link if possible.
+                // A better solution for TikTok would be:
+                // 1. Fetch oEmbed endpoint: https://www.tiktok.com/oembed?url=<tiktok_url>
+                // 2. Parse response for iframe HTML.
+                // For this direct HTML generation, I will put a placeholder or simple iframe with original URL.
+                videoType = 'tiktok';
+                alert('Atenção: A integração de vídeos do TikTok pode exigir configurações adicionais ou uso de SDK para funcionar perfeitamente em iframes.');
+                embedUrl = url; // Fallback to original URL, might not work
+            }
+
+            if (!embedUrl) {
+                alert('URL de vídeo inválida ou não suportada (apenas YouTube e TikTok).');
+                return;
+            }
+
+            const videoData = { url, embedUrl, category: videoType };
+            database.ref('videos').push(videoData)
+                .then(() => {
+                    alert('Vídeo adicionado com sucesso!');
+                    videoUrlInput.value = '';
+                    loadVideos(); // Reload gallery
+                })
+                .catch((error) => {
+                    console.error('Erro ao adicionar vídeo:', error);
+                    alert('Erro ao adicionar vídeo.');
+                });
+        }
+
+        addVideoBtn.addEventListener('click', addVideo);
+
+        function loadVideos() {
+            database.ref('videos').on('value', (snapshot) => {
+                videoGalleryGrid.innerHTML = '';
+                videoList.innerHTML = '';
+                const videos = snapshot.val();
+                if (videos) {
+                    Object.keys(videos).forEach(key => {
+                        const video = videos[key];
+                        // Render for main gallery
+                        renderVideoItem(key, video.url, video.embedUrl, video.category);
+                        // Render for admin list
+                        renderAdminVideoItem(key, video.url, video.category);
+                    });
+                }
+            });
+        }
+
+        function renderVideoItem(key, originalUrl, embedUrl, category) {
+            const div = document.createElement('div');
+            div.classList.add('gallery-item');
+            div.dataset.category = category;
+            let iframeSrc = embedUrl;
+            if (category === 'tiktok') {
+                 // For TikTok, often it's better to link out or use a dedicated embed method
+                 // A simple iframe with the original URL might not work due to X-Frame-Options
+                 // or other security policies. We'll show a link and an attempt to embed.
+                 div.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe src="${originalUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p>${originalUrl}</p>
+                 `;
+            } else { // YouTube
+                div.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe src="${iframeSrc}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p>${originalUrl}</p>
+                `;
+            }
+            videoGalleryGrid.appendChild(div);
+        }
+
+        function renderAdminVideoItem(key, url, category) {
+            const div = document.createElement('div');
+            div.classList.add('uploaded-item'); // Reusing style
+            div.innerHTML = `
+                <span>${url} (${category})</span>
+                <button class="btn-delete" data-key="${key}">Remover</button>
+            `;
+            videoList.appendChild(div);
+            div.querySelector('.btn-delete').addEventListener('click', (e) => {
+                if (confirm('Tem certeza que deseja remover este vídeo?')) {
+                    database.ref('videos/' + e.target.dataset.key).remove()
+                        .then(() => alert('Vídeo removido!'))
+                        .catch(err => console.error(err));
+                }
+            });
+        }
+
+        videoFilterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                videoFilterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.dataset.filter;
+                videoGalleryGrid.querySelectorAll('.gallery-item').forEach(item => {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- Characters Section Functions ---
+        function createCharacterSlot(character = {}) {
+            const slot = document.createElement('div');
+            slot.classList.add('admin-character-slot');
+            slot.innerHTML = `
+                <button class="btn-remove-slot">Remover Slot</button>
+                <div class="upload-area-char">
+                    <p>Arraste e solte ou clique para foto</p>
+                    <input type="file" accept="image/*" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label>Nome:</label>
+                </div>
+                <div class="form-group">
+                    <label>Grupo:</label>
+                </div>
+            `;
+
+            const imgPreview = slot.querySelector('.character-preview-img');
+            const uploadAreaChar = slot.querySelector('.upload-area-char');
+            const fileInput = uploadAreaChar.querySelector('input[type="file"]');
+            const removeBtn = slot.querySelector('.btn-remove-slot');
+
+            uploadAreaChar.addEventListener('click', () => fileInput.click());
+            uploadAreaChar.addEventListener('dragover', (e) => { e.preventDefault(); uploadAreaChar.style.backgroundColor = 'rgba(156, 108, 222, 0.1)'; });
+            uploadAreaChar.addEventListener('dragleave', () => { uploadAreaChar.style.backgroundColor = 'transparent'; });
+            uploadAreaChar.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadAreaChar.style.backgroundColor = 'transparent';
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    fileInput.files = e.dataTransfer.files; // Assign file to input for processing
+                    handleCharacterPhotoChange(slot, file);
+                }
+            });
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) handleCharacterPhotoChange(slot, file);
+            });
+
+            removeBtn.addEventListener('click', () => {
+                if (confirm('Tem certeza que deseja remover este personagem?')) {
+                    slot.remove();
+                    characterSlots = characterSlots.filter(s => s !== slot);
+                }
+            });
+            return slot;
+        }
+
+        function handleCharacterPhotoChange(slot, file) {
+            const imgPreview = slot.querySelector('.character-preview-img');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imgPreview.src = e.target.result;
+                slot.dataset.newFile = true; // Mark that this slot has a new file to upload
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function loadCharacters() {
+            database.ref('characters').on('value', (snapshot) => {
+                charactersDisplayGrid.innerHTML = '';
+                adminCharacterSlotsContainer.innerHTML = '';
+                characterSlots = []; // Reset admin slots
+
+                const characters = snapshot.val();
+                if (characters) {
+                    Object.keys(characters).forEach(key => {
+                        const char = { ...characters[key], id: key };
+                        // Display on main page
+                        const div = document.createElement('div');
+                        div.classList.add('character-card');
+                        div.innerHTML = `
+                            <h3>${char.name}</h3>
+                            <p>${char.group}</p>
+                        `;
+                        charactersDisplayGrid.appendChild(div);
+
+                        // Admin panel
+                        const adminSlot = createCharacterSlot(char);
+                        adminSlot.dataset.characterId = key; // Store Firebase key
+                        adminCharacterSlotsContainer.appendChild(adminSlot);
+                        characterSlots.push(adminSlot);
+                        adminSlot.querySelector('input[type="file"]').dataset.originalUrl = char.imageUrl; // Store original URL
+                    });
+                }
+                // Ensure there are at least 6 slots if less than 6 characters loaded
+                for (let i = characterSlots.length; i < 6; i++) {
+                    addCharacterSlot();
+                }
+            });
+        }
+
+        addCharacterSlotBtn.addEventListener('click', () => addCharacterSlot());
+
+        function addCharacterSlot() {
+            const newSlot = createCharacterSlot();
+            adminCharacterSlotsContainer.appendChild(newSlot);
+            characterSlots.push(newSlot);
+        }
+
+        saveCharactersBtn.addEventListener('click', async () => {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para salvar personagens.');
+                return;
+            }
+
+            alert('Salvando personagens, por favor aguarde...');
+            const updates = {};
+            const charactersToDelete = [];
+
+            // Identify characters to delete (if a slot was removed from UI but exists in Firebase)
+            Object.keys(currentFirebaseCharacters).forEach(fbKey => {
+                if (!characterSlots.some(slot => slot.dataset.characterId === fbKey)) {
+                    charactersToDelete.push(fbKey);
+                }
+            });
+
+            for (const slot of characterSlots) {
+                const nameInput = slot.querySelector('input[type="text"]:nth-of-type(1)');
+                const groupInput = slot.querySelector('input[type="text"]:nth-of-type(2)');
+                const fileInput = slot.querySelector('input[type="file"]');
+                const imgPreview = slot.querySelector('.character-preview-img');
+
+                const name = nameInput.value.trim();
+                const group = groupInput.value.trim();
+                let imageUrl = imgPreview.src; // Current displayed image
+
+                // If no name, consider it an empty slot and skip or mark for deletion
+                if (!name && !group && !fileInput.files[0] && !imgPreview.src.includes('placeholder')) {
+                    if (slot.dataset.characterId) {
+                        charactersToDelete.push(slot.dataset.characterId);
+                    }
+                    continue; // Skip empty slots
+                }
+
+                if (slot.dataset.newFile && fileInput.files.length > 0) { // New file selected
+                    const file = fileInput.files[0];
+                    const fileRef = storageRef.child(`characters/${Date.now()}-${file.name}`);
+                    try {
+                        const snapshot = await fileRef.put(file);
+                        imageUrl = await snapshot.ref.getDownloadURL();
+                        // Delete old image if it exists and was not a placeholder
+                        if (fileInput.dataset.originalUrl && !fileInput.dataset.originalUrl.includes('placeholder')) {
+                            const oldImageRef = storage.refFromURL(fileInput.dataset.originalUrl);
+                            await oldImageRef.delete().catch(err => console.warn("Could not delete old character image:", err));
+                        }
+                    } catch (error) {
+                        console.error('Erro ao enviar foto do personagem:', error);
+                        continue;
+                    }
+                } else if (imgPreview.src.includes('placeholder') && !fileInput.files[0] && !name && !group) {
+                    // If slot becomes empty and had no previous image, ignore
+                    if (slot.dataset.characterId) {
+                        charactersToDelete.push(slot.dataset.characterId);
+                    }
+                    continue;
+                } else if (!name && !group && imgPreview.src.includes('placeholder')) {
+                     // Completely empty slot, no data, no image, no id
+                     if (slot.dataset.characterId) {
+                        charactersToDelete.push(slot.dataset.characterId);
+                     }
+                     continue;
+                }
+
+
+                const charData = { name, group, imageUrl };
+                if (slot.dataset.characterId) {
+                    updates[`characters/${slot.dataset.characterId}`] = charData;
+                } else {
+                    const newKey = database.ref('characters').push().key;
+                    updates[`characters/${newKey}`] = charData;
+                    slot.dataset.characterId = newKey; // Assign new key to the slot
+                }
+            }
+
+            // Perform deletions
+            for (const key of charactersToDelete) {
+                updates[`characters/${key}`] = null; // Mark for deletion in Firebase
+            }
+
+            database.ref().update(updates)
+                .then(() => {
+                    alert('Personagens salvos com sucesso!');
+                    loadCharacters(); // Reload to reflect changes
+                })
+                .catch((error) => {
+                    console.error('Erro ao salvar personagens:', error);
+                    alert('Erro ao salvar personagens.');
+                });
+        });
+
+        // --- Testimonials Section Functions ---
+        function loadTestimonialsData() {
+            database.ref('testimonials').on('value', (snapshot) => {
+                testimonialsDisplayGrid.innerHTML = '';
+                testimonialsAdminList.innerHTML = '';
+                const data = snapshot.val();
+                
+                // Load section title
+                database.ref('testimonialSettings/title').once('value', (titleSnapshot) => {
+                });
+
+                if (data) {
+                    Object.keys(data).forEach(key => {
+                        const testimonial = data[key];
+                        // Render for main page
+                        const div = document.createElement('div');
+                        div.classList.add('depoimento-card');
+                        div.innerHTML = `
+                            <p>"${testimonial.text}"</p>
+                            <strong>- ${testimonial.author}</strong>
+                        `;
+                        testimonialsDisplayGrid.appendChild(div);
+
+                        // Render for admin list
+                        const adminItem = document.createElement('div');
+                        adminItem.classList.add('admin-testimonial-item');
+                        adminItem.innerHTML = `
+                            <p>"${testimonial.text}" <strong>- ${testimonial.author}</strong></p>
+                            <button class="btn-delete" data-key="${key}">Excluir</button>
+                        `;
+                        testimonialsAdminList.appendChild(adminItem);
+
+                        adminItem.querySelector('.btn-delete').addEventListener('click', (e) => {
+                            if (confirm('Tem certeza que deseja excluir este depoimento?')) {
+                                database.ref('testimonials/' + e.target.dataset.key).remove()
+                                    .then(() => alert('Depoimento excluído!'))
+                                    .catch(err => console.error(err));
+                            }
+                        });
+                    });
+                }
+            });
+        }
+
+        adminDepoimentosSectionTitle.addEventListener('change', () => {
+            if (!firebaseUser) return;
+            database.ref('testimonialSettings/title').set(adminDepoimentosSectionTitle.value)
+                .then(() => console.log('Título do depoimento atualizado.'))
+                .catch(err => console.error('Erro ao atualizar título do depoimento:', err));
+        });
+
+        addTestimonialBtn.addEventListener('click', () => {
+            if (!firebaseUser) {
+                alert('Você precisa estar logado como Admin para adicionar depoimentos.');
+                return;
+            }
+            const text = newTestimonialText.value.trim();
+            const author = newTestimonialText.value.trim();
+                alert('Preencha o texto e o autor do depoimento.');
+                return;
+            }
+            database.ref('testimonials').push({ text, author })
+                .then(() => {
+                    alert('Depoimento adicionado!');
+                    newTestimonialText.value = '';
+                    newTestimonialAuthor.value = '';
+                })
+                .catch(err => console.error(err));
+        });
+
+
+        // --- Initial Load ---
+        function loadAdminData() {
+            loadPhotos();
+            loadVideos();
+            loadTrilogiaData();
+            loadCharacters();
+            loadTestimonialsData();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme();
+            loadPhotos(); // Initial load for main photo gallery
+            loadVideos(); // Initial load for main video gallery
+            loadTrilogiaData(); // Initial load for main trilogia section
+            loadCharacters(); // Initial load for main characters section
+            loadTestimonialsData(); // Initial load for main testimonials section
+        });
+
+    </script>
+</body>
+</html>
