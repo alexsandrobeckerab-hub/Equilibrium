@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilogia Equilibrium</title>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts for alternative fonts, will be handled by JS/CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Georgia:wght@400;700&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            --primary-color: #6C5CE7; /* Roxo */
+            --secondary-color: #A29BFE; /* Lilás */
+            --accent-color: #00B894; /* Verde Água */
+            --text-color: #E6E6E6; /* Cinza Claro */
+            --gold-color: #FFD700; /* Dourado */
+            --bg-color: #2D3436; /* Cinza Escuro */
+            --card-bg-color: #4A4A4A; /* Cinza Médio */
+            --hover-color: #8183c5; /* Cor para hover */
+            --heading-color: var(--gold-color);
+            --font-family-body: Arial, sans-serif;
+            --font-family-headings: Arial, sans-serif;
+            --font-family-logo: Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Global Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-headings);
+            color: var(--heading-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.8em; }
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.8em; }
+        h4 { font-size: 1.5em; }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--card-bg-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-family-logo);
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--gold-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .admin-btn-container {
+            position: relative;
+        }
+
+        #admin-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #admin-btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080/4A4A4A/E6E6E6?text=Hero+Image') no-repeat center center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        #hero h1 {
+            font-size: 3.8em;
+            margin-bottom: 20px;
+            color: var(--gold-color);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        #hero p {
+            font-size: 1.5em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-main {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn-main:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-3px);
+        }
+
+        /* Sections Styling */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--card-bg-color);
+        }
+
+        .section-title {
+            font-size: 3em;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--gold-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Trilogia Section */
+        #trilogia .book-card {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            margin: 0 auto; /* Centraliza um único card */
+            max-width: 600px; /* Limita largura para o único card */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #trilogia .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        #trilogia .book-cover {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        #trilogia h3 {
+            color: var(--gold-color);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        #trilogia p {
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+
+        /* Personagens Section */
+        #personagens .personagens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        #personagens .personagem-card {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        #personagens .personagem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        #personagens .personagem-cover {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        #personagens h4 {
+            color: var(--gold-color);
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+
+        #personagens .personagem-group {
+            color: var(--accent-color);
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        /* Image Gallery */
+        #galeria .filters {
+            margin-bottom: 40px;
+        }
+
+        #galeria .filter-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #galeria .filter-btn:hover,
+        #galeria .filter-btn.active {
+            background-color: var(--primary-color);
+        }
+
+        #galeria .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        #galeria .image-item {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        #galeria .image-item:hover {
+            transform: scale(1.03);
+        }
+
+        #galeria .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Videos Section */
+        #videos .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        #videos .video-item {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            padding-bottom: 10px;
+        }
+        
+        #videos .video-item:hover {
+            transform: translateY(-5px);
+        }
+
+        #videos .video-item iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            display: block;
+        }
+
+        #videos .video-item h4 {
+            color: var(--text-color);
+            font-size: 1.2em;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        #videos .video-item p {
+            font-size: 0.9em;
+            color: var(--text-color);
+            padding: 0 15px;
+        }
+
+        /* Depoimentos Section */
+        #depoimentos .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        #depoimentos .depoimento-card {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            text-align: left;
+            position: relative;
+        }
+
+        #depoimentos .depoimento-card::before {
+            content: '“';
+            font-family: Arial, sans-serif; /* Fallback for quotes */
+            font-size: 4em;
+            color: var(--primary-color);
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            opacity: 0.3;
+        }
+
+        #depoimentos .depoimento-text {
+            font-size: 1.1em;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        #depoimentos .depoimento-author {
+            font-weight: bold;
+            color: var(--gold-color);
+            font-size: 1em;
+            text-align: right;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .social-icons a {
+            color: #ccc;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Admin Panel */
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .admin-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .admin-modal {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .admin-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .admin-close-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .admin-tabs {
+            display: flex;
+            border-bottom: 1px solid #555;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .admin-tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            color: var(--text-color);
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .admin-tab-btn:hover {
+            background-color: #555;
+        }
+
+        .admin-tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: 2px solid var(--gold-color);
+        }
+
+        .admin-tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .admin-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .admin-form input[type="text"],
+        .admin-form input[type="email"],
+        .admin-form input[type="password"],
+        .admin-form textarea,
+        .admin-form select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #777;
+            border-radius: 5px;
+            background-color: #333;
+            color: var(--text-color);
+            font-size: 1em;
+        }
+        .admin-form input[type="color"] {
+            width: 80px;
+            height: 40px;
+            border: none;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+            vertical-align: middle;
+        }
+
+        .admin-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-delete {
+            background-color: #d63031;
+            margin-left: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+        }
+        .btn-delete:hover {
+            background-color: #ff6b6b;
+        }
+
+        /* Drag & Drop Area */
+        .drag-drop-area {
+            border: 2px dashed #777;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            background-color: #3a3a3a;
+        }
+
+        .drag-drop-area.hover {
+            border-color: var(--accent-color);
+            background-color: #4f4f4f;
+        }
+
+        .drag-drop-area p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #bbb;
+        }
+
+        .image-preview-grid, .video-list, .depoimentos-list, .personagens-admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .personagens-admin-grid {
+             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .personagem-admin-item {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .personagem-admin-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        .personagem-admin-item input {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .image-preview-item, .video-item-admin, .depoimento-item-admin {
+            position: relative;
+            background-color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .image-preview-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+        }
+        .video-item-admin iframe {
+            width: 100%;
+            height: 100px;
+            display: block;
+        }
+        .depoimento-item-admin p {
+            padding: 10px;
+            font-size: 0.9em;
+            margin: 0;
+            height: 80px;
+            overflow: hidden;
+        }
+        .item-admin-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0,0,0,0.7);
+            border-radius: 3px;
+            padding: 3px;
+        }
+        .item-admin-actions button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 0.8em;
+            cursor: pointer;
+            padding: 3px;
+        }
+
+        /* Color Picker Display */
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .color-picker-group label {
+            flex-basis: 150px;
+            margin-bottom: 0;
+        }
+        .color-picker-group input[type="color"] {
+            flex-grow: 0;
+            margin-left: 10px;
+        }
+        .color-picker-group input[type="text"] {
+             flex-grow: 1;
+             margin-left: 10px;
+             margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li {
+                margin: 0 10px 10px 10px;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            #hero h1 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 2.5em;
+            }
+
+            #trilogia .book-card, #personagens .personagens-grid, #galeria .image-grid, #videos .video-grid, #depoimentos .depoimentos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-modal {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .admin-tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            .color-picker-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .color-picker-group label {
+                margin-bottom: 5px;
+            }
+            .color-picker-group input[type="text"],
+            .color-picker-group input[type="color"] {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="#hero" class="logo">Equilibrium</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#trilogia">Trilogia</a></li>
+                    <li><a href="#personagens">Personagens</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#videos">Vídeos</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                </ul>
+            </nav>
+            <div class="admin-btn-container">
+                <button id="admin-btn">Admin</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Bem-vindo ao universo de Equilibrium</h1>
+                <p>Prepare-se para uma jornada épica onde o destino de mundos colide e heróis improváveis emergem.</p>
+                <a href="#trilogia" class="btn-main">Conheça a Trilogia</a>
+            </div>
+        </section>
+
+        <section id="trilogia">
+            <div class="container">
+                <h2 class="section-title" id="trilogia-title-display">Trilogia Equilibrium</h2>
+                <div class="book-card">
+                    <img src="https://via.placeholder.com/300x450/4A4A4A/E6E6E6?text=Livro+1" alt="Capa do Livro 1" class="book-cover">
+                    <h3 id="book1-title-display">O Despertar do Sol Negro</h3>
+                    <p id="book1-text-display">Em um mundo à beira do colapapso, Sunagori descobre um legado ancestral que pode tanto salvar quanto destruir tudo que ele conhece.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="personagens">
+            <div class="container">
+                <h2 class="section-title">Personagens Principais</h2>
+                <div class="personagens-grid" id="personagens-display">
+                    <!-- Personagens will be loaded here dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <div class="container">
+                <h2 class="section-title">Galeria de Imagens</h2>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="arte">Artes</button>
+                    <button class="filter-btn" data-filter="cenas">Cenas</button>
+                    <button class="filter-btn" data-filter="conceitos">Conceitos</button>
+                </div>
+                <div class="image-grid" id="image-gallery">
+                    <!-- Images will be loaded here dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <section id="videos">
+            <div class="container">
+                <h2 class="section-title">Vídeos do Universo</h2>
+                <div class="video-grid" id="video-gallery">
+                    <!-- Videos will be loaded here dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <section id="depoimentos">
+            <div class="container">
+                <h2 class="section-title" id="depoimentos-title-display">O que os Leitores Dizem</h2>
+                <div class="depoimentos-grid" id="depoimentos-display">
+                    <!-- Depoimentos will be loaded here dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Trilogia Equilibrium. Todos os direitos reservados.</p>
+            <p>Email: <a href="mailto:contato@equilibrium.com">contato@equilibrium.com</a> | Telefone: <a href="tel:+5511999999999">+55 (11) 99999-9999</a></p>
+            <div class="social-icons">
+                <a href="https://instagram.com/seu-perfil" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com/@seu-perfil" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://facebook.com/seu-perfil" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/seu-perfil" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/in/seu-perfil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Overlay -->
+    <div class="admin-overlay" id="admin-overlay">
+        <div class="admin-modal">
+            <button class="admin-close-btn" id="admin-close-btn">&times;</button>
+            <h3>Painel Administrativo</h3>
+
+            <!-- Login Form -->
+            <div id="admin-login-form">
+                <p>Senha de acesso:</p>
+                <input type="password" id="admin-password" placeholder="Digite a senha">
+                <button class="btn" id="admin-login-submit">Entrar</button>
+                <p id="admin-login-message" style="color: #ff6b6b; margin-top: 10px;"></p>
+            </div>
+
+            <!-- Admin Content (hidden by default) -->
+            <div id="admin-content" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" data-tab="trilogia">Trilogia</button>
+                    <button class="admin-tab-btn" data-tab="personagens">Personagens</button>
+                    <button class="admin-tab-btn" data-tab="fotos">Galeria de Imagens</button>
+                    <button class="admin-tab-btn" data-tab="videos">Galeria de Vídeos</button>
+                    <button class="admin-tab-btn" data-tab="depoimentos">Depoimentos</button>
+                    <button class="admin-tab-btn" data-tab="tema">Configurações do Tema</button>
+                    <button class="admin-tab-btn" data-tab="config">Sair</button>
+                </div>
+
+                <!-- Trilogia Admin -->
+                <div id="trilogia-admin" class="admin-tab-content active">
+                    <h4>Editar Seção Trilogia</h4>
+                    <form class="admin-form">
+                        <label for="admin-trilogia-title">Título da Seção:</label>
+                        <input type="text" id="admin-trilogia-title">
+                        
+                        <label for="admin-book1-title">Título do Livro 1:</label>
+                        <input type="text" id="admin-book1-title">
+
+                        <label for="admin-book1-text">Texto Complementar do Livro 1:</label>
+                        <textarea id="admin-book1-text"></textarea>
+                        <button type="button" class="btn" id="save-trilogia-settings">Salvar Trilogia</button>
+                    </form>
+                </div>
+
+                <!-- Personagens Admin -->
+                <div id="personagens-admin" class="admin-tab-content">
+                    <h4>Gerenciar Personagens</h4>
+                    <div class="personagens-admin-grid" id="personagens-admin-list">
+                        <!-- Personagem input fields will be loaded here -->
+                    </div>
+                    <button type="button" class="btn" id="add-personagem-field">Adicionar Campo</button>
+                    <button type="button" class="btn" id="save-personagens-settings">Salvar Personagens</button>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-color);">
+                        (Clique na imagem para fazer upload)
+                    </p>
+                </div>
+
+                <!-- Fotos Admin -->
+                <div id="fotos-admin" class="admin-tab-content">
+                    <h4>Gerenciar Galeria de Imagens</h4>
+                    <div class="drag-drop-area" id="image-drag-drop-area">
+                        <p>Arraste e solte imagens aqui ou clique para selecionar</p>
+                        <input type="file" id="image-upload-input" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <form class="admin-form">
+                        <label for="image-category">Categoria:</label>
+                        <select id="image-category">
+                            <option value="arte">Artes</option>
+                            <option value="cenas">Cenas</option>
+                            <option value="conceitos">Conceitos</option>
+                        </select>
+                        <button type="button" class="btn" id="upload-image-btn">Fazer Upload</button>
+                    </form>
+                    <div class="image-preview-grid" id="admin-image-preview">
+                        <!-- Uploaded images will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Videos Admin -->
+                <div id="videos-admin" class="admin-tab-content">
+                    <h4>Gerenciar Galeria de Vídeos</h4>
+                    <form class="admin-form">
+                        <label for="video-url">Link do YouTube/TikTok:</label>
+                        <input type="text" id="video-url" placeholder="Ex: https://www.youtube.com/watch?v=VIDEO_ID ou https://www.tiktok.com/@user/video/VIDEO_ID">
+                        <label for="video-title">Título do Vídeo:</label>
+                        <input type="text" id="video-title" placeholder="Ex: Trailer Oficial">
+                        <label for="video-description">Descrição (opcional):</label>
+                        <textarea id="video-description" placeholder="Uma breve descrição do vídeo"></textarea>
+                        <button type="button" class="btn" id="add-video-btn">Adicionar Vídeo</button>
+                    </form>
+                    <div class="video-list" id="admin-video-list">
+                        <!-- Added videos will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Depoimentos Admin -->
+                <div id="depoimentos-admin" class="admin-tab-content">
+                    <h4>Gerenciar Depoimentos</h4>
+                    <form class="admin-form">
+                        <label for="admin-depoimentos-title">Título da Seção Depoimentos:</label>
+                        <input type="text" id="admin-depoimentos-title">
+                        <label for="depoimento-text">Texto do Depoimento:</label>
+                        <textarea id="depoimento-text" placeholder="Digite o depoimento aqui"></textarea>
+                        <label for="depoimento-author">Autor do Depoimento:</label>
+                        <input type="text" id="depoimento-author" placeholder="Nome do autor">
+                        <button type="button" class="btn" id="add-depoimento-btn">Adicionar Depoimento</button>
+                        <button type="button" class="btn" id="save-depoimentos-title">Salvar Título</button>
+                    </form>
+                    <div class="depoimentos-list" id="admin-depoimentos-list">
+                        <!-- Added testimonials will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Tema Admin -->
+                <div id="tema-admin" class="admin-tab-content">
+                    <h4>Configurações do Tema</h4>
+                    <div class="color-picker-group">
+                        <label for="primary-color-picker">Cor Primária:</label>
+                        <input type="color" id="primary-color-picker">
+                        <input type="text" id="primary-color-hex" value="#6C5CE7">
+                    </div>
+                    <div class="color-picker-group">
+                        <label for="secondary-color-picker">Cor Secundária:</label>
+                        <input type="color" id="secondary-color-picker">
+                        <input type="text" id="secondary-color-hex" value="#A29BFE">
+                    </div>
+                     <div class="color-picker-group">
+                        <label for="accent-color-picker">Cor de Acentuação:</label>
+                        <input type="color" id="accent-color-picker">
+                        <input type="text" id="accent-color-hex" value="#00B894">
+                    </div>
+                    <div class="color-picker-group">
+                        <label for="text-color-picker">Cor do Texto:</label>
+                        <input type="color" id="text-color-picker">
+                        <input type="text" id="text-color-hex" value="#E6E6E6">
+                    </div>
+                    <div class="color-picker-group">
+                        <label for="gold-color-picker">Cor Dourado:</label>
+                        <input type="color" id="gold-color-picker">
+                        <input type="text" id="gold-color-hex" value="#FFD700">
+                    </div>
+                    <div class="color-picker-group">
+                        <label for="bg-color-picker">Cor de Fundo Principal:</label>
+                        <input type="color" id="bg-color-picker">
+                        <input type="text" id="bg-color-hex" value="#2D3436">
+                    </div>
+                    <div class="color-picker-group">
+                        <label for="card-bg-color-picker">Cor de Fundo do Card:</label>
+                        <input type="color" id="card-bg-color-picker">
+                        <input type="text" id="card-bg-color-hex" value="#4A4A4A">
+                    </div>
+                     <div class="color-picker-group">
+                        <label for="hover-color-picker">Cor de Hover:</label>
+                        <input type="color" id="hover-color-picker">
+                        <input type="text" id="hover-color-hex" value="#8183c5">
+                    </div>
+                    <div class="color-picker-group">
+                        <label for="heading-color-picker">Cor dos Títulos:</label>
+                        <input type="color" id="heading-color-picker">
+                        <input type="text" id="heading-color-hex" value="#FFD700">
+                    </div>
+
+                    <label for="font-family-body-select">Fonte do Corpo:</label>
+                    <select id="font-family-body-select">
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Roboto, sans-serif">Roboto</option>
+                        <option value="Open Sans, sans-serif">Open Sans</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="EB Garamond, serif">EB Garamond</option>
+                    </select>
+
+                    <label for="font-family-headings-select">Fonte dos Títulos:</label>
+                    <select id="font-family-headings-select">
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Roboto, sans-serif">Roboto</option>
+                        <option value="Open Sans, sans-serif">Open Sans</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="EB Garamond, serif">EB Garamond</option>
+                    </select>
+
+                    <label for="font-family-logo-select">Fonte do Logo:</label>
+                    <select id="font-family-logo-select">
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Roboto, sans-serif">Roboto</option>
+                        <option value="Open Sans, sans-serif">Open Sans</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="EB Garamond, serif">EB Garamond</option>
+                    </select>
+
+                    <button type="button" class="btn" id="save-theme-settings">Salvar Tema</button>
+                    <button type="button" class="btn" id="restore-default-theme">Restaurar Padrão</button>
+                </div>
+
+                <!-- Settings/Logout Tab -->
+                <div id="config-admin" class="admin-tab-content">
+                    <h4>Configurações do Admin</h4>
+                    <button class="btn logout-btn" id="admin-logout-btn">Sair</button>
+                    <p style="margin-top: 1rem; text-align: center; font-size: 0.9em; color: var(--text-color);">
+                        (Esta é uma área de protótipo. A senha 'admin123' não é segura para produção. Altere no console do Firebase Authentication ou implemente um mecanismo de mudança de senha.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // Firebase Configuration (YOUR CREDENTIALS)
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-o0hS692HW7F_13p8cPPS8TWfkIPf90c",
+            authDomain: "equilibrium-alex-2.firebaseapp.com",
+            databaseURL: "https://equilibrium-alex-2-default-rtdb.firebaseio.com",
+            projectId: "equilibrium-alex-2",
+            storageBucket: "equilibrium-alex-2.firebasestorage.app",
+            messagingSenderId: "684128804738",
+            appId: "1:684128804738:web:a9ba266b2a53d82bc7799b"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
+        const storage = firebase.storage();
+
+        // Admin Panel Elements
+        const adminBtn = document.getElementById('admin-btn');
+        const adminOverlay = document.getElementById('admin-overlay');
+        const adminCloseBtn = document.getElementById('admin-close-btn');
+        const adminLoginForm = document.getElementById('admin-login-form');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const adminLoginSubmit = document.getElementById('admin-login-submit');
+        const adminLoginMessage = document.getElementById('admin-login-message');
+        const adminContent = document.getElementById('admin-content');
+        const adminTabBtns = document.querySelectorAll('.admin-tab-btn');
+        const adminTabContents = document.querySelectorAll('.admin-tab-content');
+
+        // Admin Theme Settings Elements
+        const primaryColorPicker = document.getElementById('primary-color-picker');
+        const secondaryColorPicker = document.getElementById('secondary-color-picker');
+        const accentColorPicker = document.getElementById('accent-color-picker');
+        const textColorPicker = document.getElementById('text-color-picker');
+        const goldColorPicker = document.getElementById('gold-color-picker');
+        const bgColorPicker = document.getElementById('bg-color-picker');
+        const cardBgColorPicker = document.getElementById('card-bg-color-picker');
+        const hoverColorPicker = document.getElementById('hover-color-picker');
+        const headingColorPicker = document.getElementById('heading-color-picker');
+
+        const primaryColorHex = document.getElementById('primary-color-hex');
+        const secondaryColorHex = document.getElementById('secondary-color-hex');
+        const accentColorHex = document.getElementById('accent-color-hex');
+        const textColorHex = document.getElementById('text-color-hex');
+        const goldColorHex = document.getElementById('gold-color-hex');
+        const bgColorHex = document.getElementById('bg-color-hex');
+        const cardBgColorHex = document.getElementById('card-bg-color-hex');
+        const hoverColorHex = document.getElementById('hover-color-hex');
+        const headingColorHex = document.getElementById('heading-color-hex');
+
+        const fontFamilyBodySelect = document.getElementById('font-family-body-select');
+        const fontFamilyHeadingsSelect = document.getElementById('font-family-headings-select');
+        const fontFamilyLogoSelect = document.getElementById('font-family-logo-select');
+        const saveThemeSettingsBtn = document.getElementById('save-theme-settings');
+        const restoreDefaultThemeBtn = document.getElementById('restore-default-theme');
+
+        // Admin Trilogia Elements
+        const adminTrilogiaTitleInput = document.getElementById('admin-trilogia-title');
+        const adminBook1TitleInput = document.getElementById('admin-book1-title');
+        const adminBook1TextInput = document.getElementById('admin-book1-text');
+        const saveTrilogiaSettingsBtn = document.getElementById('save-trilogia-settings');
+        const trilogiaTitleDisplay = document.getElementById('trilogia-title-display');
+        const book1TitleDisplay = document.getElementById('book1-title-display');
+        const book1TextDisplay = document.getElementById('book1-text-display');
+
+        // Admin Personagens Elements
+        const personagensAdminList = document.getElementById('personagens-admin-list');
+        const addPersonagemFieldBtn = document.getElementById('add-personagem-field');
+        const savePersonagensSettingsBtn = document.getElementById('save-personagens-settings');
+        const personagensDisplay = document.getElementById('personagens-display');
+        let personagemCount = 0; // To keep track of dynamic fields
+
+        // Admin Galeria de Imagens Elements
+        const imageDragDropArea = document.getElementById('image-drag-drop-area');
+        const imageUploadInput = document.getElementById('image-upload-input');
+        const imageCategorySelect = document.getElementById('image-category');
+        const uploadImageBtn = document.getElementById('upload-image-btn');
+        const adminImagePreview = document.getElementById('admin-image-preview');
+        const imageGallery = document.getElementById('image-gallery');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // Admin Galeria de Vídeos Elements
+        const videoUrlInput = document.getElementById('video-url');
+        const videoTitleInput = document.getElementById('video-title');
+        const videoDescriptionInput = document.getElementById('video-description');
+        const addVideoBtn = document.getElementById('add-video-btn');
+        const adminVideoList = document.getElementById('admin-video-list');
+        const videoGallery = document.getElementById('video-gallery');
+
+        // Admin Depoimentos Elements
+        const adminDepoimentosTitleInput = document.getElementById('admin-depoimentos-title');
+        const depoimentoTextInput = document.getElementById('depoimento-text');
+        const depoimentoAuthorInput = document.getElementById('depoimento-author');
+        const addDepoimentoBtn = document.getElementById('add-depoimento-btn');
+        const saveDepoimentosTitleBtn = document.getElementById('save-depoimentos-title');
+        const adminDepoimentosList = document.getElementById('admin-depoimentos-list');
+        const depoimentosTitleDisplay = document.getElementById('depoimentos-title-display');
+        const depoimentosDisplay = document.getElementById('depoimentos-display');
+
+        // --- Auth State Listener ---
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                adminLoginForm.style.display = 'none';
+                adminContent.style.display = 'block';
+                adminLoginMessage.textContent = '';
+                loadAllAdminData();
+            } else {
+                adminLoginForm.style.display = 'block';
+                adminContent.style.display = 'none';
+            }
+        });
+
+        // --- Admin Panel UI Logic ---
+        adminBtn.addEventListener('click', () => {
+            adminOverlay.classList.add('active');
+            // Try to sign in anonymously if not already authenticated
+            if (!auth.currentUser) {
+                auth.signInAnonymously().catch(error => {
+                    console.error("Erro ao fazer login anônimo:", error);
+                    adminLoginMessage.textContent = "Erro ao carregar painel admin. Tente novamente.";
+                });
+            }
+        });
+
+        adminCloseBtn.addEventListener('click', () => {
+            adminOverlay.classList.remove('active');
+        });
+
+        adminLoginSubmit.addEventListener('click', () => {
+            const password = adminPasswordInput.value;
+            // NOTE: This is a placeholder for a real admin login.
+            // For production, implement Firebase Email/Password or another secure method.
+            if (password === 'admin123') {
+                // If using anonymous auth, you might want to link it to a custom token/user
+                // For this example, we just proceed.
+                adminLoginForm.style.display = 'none';
+                adminContent.style.display = 'block';
+                adminLoginMessage.textContent = '';
+                loadAllAdminData(); // Load all content once logged in
+            } else {
+                adminLoginMessage.textContent = 'Senha incorreta.';
+            }
+        });
+
+        document.getElementById('admin-logout-btn').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                adminPasswordInput.value = '';
+                adminOverlay.classList.remove('active');
+                location.reload(); // Reload to clear admin state
+            }).catch(error => {
+                console.error("Erro ao fazer logout:", error);
+            });
+        });
+
+        adminTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                adminTabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                adminTabContents.forEach(content => content.classList.remove('active'));
+                const targetTab = document.getElementById(btn.dataset.tab + '-admin');
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                }
+            });
+        });
+
+        // --- Theming Logic ---
+        const defaultTheme = {
+            primaryColor: '#6C5CE7',
+            secondaryColor: '#A29BFE',
+            accentColor: '#00B894',
+            textColor: '#E6E6E6',
+            goldColor: '#FFD700',
+            bgColor: '#2D3436',
+            cardBgColor: '#4A4A4A',
+            hoverColor: '#8183c5',
+            headingColor: '#FFD700',
+            fontBody: 'Arial, sans-serif',
+            fontHeadings: 'Arial, sans-serif',
+            fontLogo: 'Arial, sans-serif'
+        };
+
+        function applyThemeSettings(settings) {
+            const root = document.documentElement;
+            root.style.setProperty('--primary-color', settings.primaryColor);
+            root.style.setProperty('--secondary-color', settings.secondaryColor);
+            root.style.setProperty('--accent-color', settings.accentColor);
+            root.style.setProperty('--text-color', settings.textColor);
+            root.style.setProperty('--gold-color', settings.goldColor);
+            root.style.setProperty('--bg-color', settings.bgColor);
+            root.style.setProperty('--card-bg-color', settings.cardBgColor);
+            root.style.setProperty('--hover-color', settings.hoverColor);
+            root.style.setProperty('--heading-color', settings.headingColor);
+            root.style.setProperty('--font-family-body', settings.fontBody);
+            root.style.setProperty('--font-family-headings', settings.fontHeadings);
+            root.style.setProperty('--font-family-logo', settings.fontLogo);
+
+            // Update color pickers and hex inputs in admin
+            primaryColorPicker.value = settings.primaryColor;
+            secondaryColorPicker.value = settings.secondaryColor;
+            accentColorPicker.value = settings.accentColor;
+            textColorPicker.value = settings.textColor;
+            goldColorPicker.value = settings.goldColor;
+            bgColorPicker.value = settings.bgColor;
+            cardBgColorPicker.value = settings.cardBgColor;
+            hoverColorPicker.value = settings.hoverColor;
+            headingColorPicker.value = settings.headingColor;
+
+            primaryColorHex.value = settings.primaryColor;
+            secondaryColorHex.value = settings.secondaryColor;
+            accentColorHex.value = settings.accentColor;
+            textColorHex.value = settings.textColor;
+            goldColorHex.value = settings.goldColor;
+            bgColorHex.value = settings.bgColor;
+            cardBgColorHex.value = settings.cardBgColor;
+            hoverColorHex.value = settings.hoverColor;
+            headingColorHex.value = settings.headingColor;
+
+            fontFamilyBodySelect.value = settings.fontBody;
+            fontFamilyHeadingsSelect.value = settings.fontHeadings;
+            fontFamilyLogoSelect.value = settings.fontLogo;
+        }
+
+        function loadThemeSettings() {
+            db.ref('themeSettings').once('value', snapshot => {
+                const settings = snapshot.val();
+                if (settings) {
+                    applyThemeSettings(settings);
+                } else {
+                    applyThemeSettings(defaultTheme); // Apply default if no settings saved
+                }
+            });
+        }
+
+        function saveThemeSettings() {
+            const settings = {
+                primaryColor: primaryColorPicker.value,
+                secondaryColor: secondaryColorPicker.value,
+                accentColor: accentColorPicker.value,
+                textColor: textColorPicker.value,
+                goldColor: goldColorPicker.value,
+                bgColor: bgColorPicker.value,
+                cardBgColor: cardBgColorPicker.value,
+                hoverColor: hoverColorPicker.value,
+                headingColor: headingColorPicker.value,
+                fontBody: fontFamilyBodySelect.value,
+                fontHeadings: fontFamilyHeadingsSelect.value,
+                fontLogo: fontFamilyLogoSelect.value
+            };
+            db.ref('themeSettings').set(settings)
+                .then(() => alert('Tema salvo com sucesso!'))
+                .catch(error => console.error('Erro ao salvar tema:', error));
+        }
+
+        function hexToRgb(hex) {
+            const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                return r + r + g + g + b + b;
+            });
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : null;
+        }
+
+        // Event listeners for theme changes
+        const colorPickers = document.querySelectorAll('input[type="color"]');
+        colorPickers.forEach(picker => {
+            picker.addEventListener('input', (e) => {
+                const hexInput = document.getElementById(e.target.id.replace('-picker', '-hex'));
+                if (hexInput) hexInput.value = e.target.value;
+                document.documentElement.style.setProperty(`--${e.target.id.replace('-color-picker', '-color')}`, e.target.value);
+            });
+        });
+        const hexInputs = document.querySelectorAll('input[id$="-hex"]');
+        hexInputs.forEach(input => {
+            input.addEventListener('change', (e) => { // Use 'change' to apply after user finishes typing
+                const colorPicker = document.getElementById(e.target.id.replace('-hex', '-picker'));
+                if (colorPicker) colorPicker.value = e.target.value;
+                document.documentElement.style.setProperty(`--${e.target.id.replace('-color-hex', '-color')}`, e.target.value);
+            });
+        });
+        fontFamilyBodySelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--font-family-body', e.target.value);
+        });
+        fontFamilyHeadingsSelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--font-family-headings', e.target.value);
+        });
+        fontFamilyLogoSelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--font-family-logo', e.target.value);
+        });
+        saveThemeSettingsBtn.addEventListener('click', saveThemeSettings);
+        restoreDefaultThemeBtn.addEventListener('click', () => {
+            applyThemeSettings(defaultTheme);
+            db.ref('themeSettings').set(defaultTheme) // Also save defaults to Firebase
+                .then(() => alert('Tema restaurado para o padrão!'))
+                .catch(error => console.error('Erro ao restaurar tema:', error));
+        });
+
+        // --- Trilogia Section Logic ---
+        function loadTrilogiaSettings() {
+            db.ref('trilogiaSettings').on('value', snapshot => {
+                const settings = snapshot.val();
+                if (settings) {
+
+                    // Update admin inputs
+                }
+            });
+        }
+
+        saveTrilogiaSettingsBtn.addEventListener('click', () => {
+            const settings = {
+                trilogiaTitle: adminTrilogiaTitleInput.value,
+                book1Title: adminBook1TitleInput.value,
+                book1Text: adminBook1TextInput.value
+            };
+            db.ref('trilogiaSettings').set(settings)
+                .then(() => alert('Configurações da Trilogia salvas!'))
+                .catch(error => console.error('Erro ao salvar trilogia:', error));
+        });
+
+        // --- Personagens Section Logic ---
+        function createPersonagemField(personagem = {}) {
+            const div = document.createElement('div');
+            div.className = 'personagem-admin-item';
+            div.dataset.id = id;
+
+            div.innerHTML = `
+                <div class="item-admin-actions">
+                    <button class="btn-delete delete-personagem-btn" data-id="${id}">X</button>
+                </div>
+            `;
+            personagensAdminList.appendChild(div);
+
+            const imgElement = div.querySelector('.personagem-upload-img');
+            imgElement.addEventListener('click', () => {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+                fileInput.onchange = e => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        uploadPersonagemImage(file, id, imgElement);
+                    }
+                };
+                fileInput.click();
+            });
+            div.querySelector('.delete-personagem-btn').addEventListener('click', deletePersonagem);
+        }
+
+        function uploadPersonagemImage(file, id, imgElement) {
+            const storageRef = storage.ref(`personagens/${id}/${file.name}`);
+            const uploadTask = storageRef.put(file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => { /* progress here if needed */ },
+                (error) => { console.error('Upload Error:', error); alert('Erro ao fazer upload da imagem.'); },
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+                        imgElement.src = downloadURL;
+                        // Now, we need to save this URL with the character's data when "Salvar Personagens" is clicked
+                        // For now, it updates the img src directly.
+                        console.log(`Image uploaded for ${id}: ${downloadURL}`);
+                    });
+                }
+            );
+        }
+
+        function loadPersonagens() {
+            db.ref('personagens').on('value', snapshot => {
+                const personagensData = snapshot.val();
+                personagensAdminList.innerHTML = ''; // Clear admin list
+                personagensDisplay.innerHTML = ''; // Clear public display
+                
+                const personagensArray = [];
+                if (personagensData) {
+                    Object.entries(personagensData).forEach(([id, data]) => {
+                        personagensArray.push({ id, ...data });
+                    });
+                }
+                
+                personagensArray.forEach(p => {
+                    createPersonagemField(p);
+                    // Render for public display
+                    personagensDisplay.innerHTML += `
+                        <div class="personagem-card">
+                            <img src="${p.imageUrl}" alt="${p.name}" class="personagem-cover">
+                            <h4>${p.name}</h4>
+                            <p class="personagem-group">${p.group}</p>
+                        </div>
+                    `;
+                });
+                
+                // Add empty fields if less than 6 initially or if needed (only in admin view)
+                if (auth.currentUser) { // Only show empty fields in admin if logged in
+                    while (personagensAdminList.children.length < Math.max(6, personagensArray.length + 1)) {
+                        createPersonagemField();
+                    }
+                }
+            });
+        }
+
+        addPersonagemFieldBtn.addEventListener('click', () => createPersonagemField());
+
+        savePersonagensSettingsBtn.addEventListener('click', () => {
+            const personagensToSave = {};
+            const itemElements = personagensAdminList.querySelectorAll('.personagem-admin-item');
+            
+            itemElements.forEach(item => {
+                const id = item.dataset.id;
+                const nameInput = item.querySelector('input[data-field="name"]');
+                const groupInput = item.querySelector('input[data-field="group"]');
+                const imgElement = item.querySelector('.personagem-upload-img');
+
+                    personagensToSave[id] = {
+                        name: nameInput.value,
+                        group: groupInput.value,
+                        imageUrl: imgElement.src // This will be placeholder or actual URL
+                    };
+                }
+            });
+
+            db.ref('personagens').set(personagensToSave)
+                .then(() => alert('Personagens salvos com sucesso!'))
+                .catch(error => console.error('Erro ao salvar personagens:', error));
+        });
+        
+        function deletePersonagem(event) {
+            const id = event.target.dataset.id;
+            if (confirm('Tem certeza que deseja excluir este personagem?')) {
+                const itemDiv = event.target.closest('.personagem-admin-item');
+                const imageUrl = itemDiv.querySelector('img').src;
+
+                // Attempt to delete image from storage if it's not a placeholder
+                if (imageUrl && !imageUrl.includes('placeholder')) {
+                    const storageRef = storage.refFromURL(imageUrl);
+                    storageRef.delete().catch(err => console.warn("Could not delete image from storage (might not exist or permissions):", err));
+                }
+
+                db.ref(`personagens/${id}`).remove()
+                    .then(() => {
+                        alert('Personagem excluído!');
+                    })
+                    .catch(error => console.error('Erro ao excluir personagem:', error));
+            }
+        }
+
+
+        // --- Galeria de Imagens Logic (Existing, needs re-integration) ---
+        let selectedCategory = 'all';
+
+        function uploadImageToFirebase(file, category) {
+            const storageRef = storage.ref(`gallery/${category}/${file.name}`);
+            const uploadTask = storageRef.put(file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => { /* progress here */ },
+                (error) => { console.error('Upload Error:', error); alert('Erro ao fazer upload da imagem.'); },
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+                        db.ref('images').push({
+                            url: downloadURL,
+                            category: category,
+                            timestamp: firebase.database.ServerValue.TIMESTAMP
+                        }).then(() => {
+                            alert('Imagem adicionada com sucesso!');
+                        }).catch(error => console.error('Erro ao salvar imagem no DB:', error));
+                    });
+                }
+            );
+        }
+
+        imageDragDropArea.addEventListener('click', () => imageUploadInput.click());
+        imageUploadInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                alert(`${e.target.files.length} arquivo(s) selecionado(s). Clique em 'Fazer Upload' para enviar.`);
+            }
+        });
+
+        imageDragDropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageDragDropArea.classList.add('hover');
+        });
+        imageDragDropArea.addEventListener('dragleave', () => {
+            imageDragDropArea.classList.remove('hover');
+        });
+        imageDragDropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageDragDropArea.classList.remove('hover');
+            imageUploadInput.files = e.dataTransfer.files;
+            if (imageUploadInput.files.length > 0) {
+                alert(`${imageUploadInput.files.length} arquivo(s) selecionado(s) via arrastar e soltar. Clique em 'Fazer Upload' para enviar.`);
+            }
+        });
+
+        uploadImageBtn.addEventListener('click', () => {
+            if (imageUploadInput.files.length === 0) {
+                alert('Por favor, selecione um arquivo para upload.');
+                return;
+            }
+            const category = imageCategorySelect.value;
+            Array.from(imageUploadInput.files).forEach(file => {
+                uploadImageToFirebase(file, category);
+            });
+            imageUploadInput.value = ''; // Clear file input
+        });
+
+        function renderAdminImages(images) {
+            adminImagePreview.innerHTML = '';
+            images.forEach(image => {
+                const div = document.createElement('div');
+                div.className = 'image-preview-item';
+                div.innerHTML = `
+                    <img src="${image.url}" alt="${image.category}">
+                    <div class="item-admin-actions">
+                        <button class="btn-delete" data-id="${image.id}">X</button>
+                    </div>
+                `;
+                adminImagePreview.appendChild(div);
+                div.querySelector('.btn-delete').addEventListener('click', (e) => deleteImage(e.target.dataset.id, image.url));
+            });
+        }
+
+        function deleteImage(id, url) {
+            if (confirm('Tem certeza que deseja excluir esta imagem?')) {
+                // Delete from Storage
+                const storageRef = storage.refFromURL(url);
+                storageRef.delete().then(() => {
+                    // Delete from Database
+                    db.ref(`images/${id}`).remove()
+                        .then(() => alert('Imagem excluída!'))
+                        .catch(error => console.error('Erro ao excluir imagem do DB:', error));
+                }).catch(error => console.error('Erro ao excluir imagem do Storage:', error));
+            }
+        }
+
+        function loadImagesForGallery() {
+            db.ref('images').on('value', snapshot => {
+                const imagesData = snapshot.val();
+                const imagesArray = imagesData ? Object.entries(imagesData).map(([id, data]) => ({ id, ...data })) : [];
+                renderAdminImages(imagesArray);
+                displayGalleryImages(imagesArray);
+            });
+        }
+
+        function displayGalleryImages(images) {
+            imageGallery.innerHTML = '';
+            const filteredImages = selectedCategory === 'all' ? images : images.filter(img => img.category === selectedCategory);
+            filteredImages.forEach(image => {
+                const div = document.createElement('div');
+                div.className = 'image-item';
+                div.innerHTML = `<img src="${image.url}" alt="${image.category}">`;
+                imageGallery.appendChild(div);
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedCategory = btn.dataset.filter;
+                loadImagesForGallery(); // Re-render with new filter
+            });
+        });
+
+        // --- Videos Section Logic ---
+        function getEmbedUrl(url) {
+                return `https://www.youtube.com/embed/${videoId}`;
+            } else if (url.includes('tiktok.com')) {
+                const parts = url.split('/');
+                const videoId = parts[parts.indexOf('video') + 1];
+                // For TikTok embeds, it's often more complex due to their SDK.
+                // A direct iframe might have limited functionality or require sandbox attributes.
+                // For a fully functional TikTok embed, consider their embed.js SDK.
+                // For this example, we'll use a simple iframe, which might not always work perfectly without the SDK.
+                return `https://www.tiktok.com/embed/${videoId}`; 
+            }
+            return null;
+        }
+
+        addVideoBtn.addEventListener('click', () => {
+            const url = videoUrlInput.value.trim();
+            const title = videoTitleInput.value.trim();
+            const description = videoDescriptionInput.value.trim();
+
+            if (!url) {
+                alert('Por favor, insira o link do vídeo.');
+                return;
+            }
+
+            const embedUrl = getEmbedUrl(url);
+            if (!embedUrl) {
+                alert('Link de vídeo não suportado (apenas YouTube ou TikTok).');
+                return;
+            }
+
+            db.ref('videos').push({ url, title, description, embedUrl, timestamp: firebase.database.ServerValue.TIMESTAMP })
+                .then(() => {
+                    alert('Vídeo adicionado com sucesso!');
+                    videoUrlInput.value = '';
+                    videoTitleInput.value = '';
+                    videoDescriptionInput.value = '';
+                })
+                .catch(error => console.error('Erro ao adicionar vídeo:', error));
+        });
+
+        function renderAdminVideos(videos) {
+            adminVideoList.innerHTML = '';
+            videos.forEach(video => {
+                const div = document.createElement('div');
+                div.className = 'video-item-admin';
+                div.innerHTML = `
+                    <iframe src="${video.embedUrl}" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                    <div class="item-admin-actions">
+                        <button class="btn-delete" data-id="${video.id}">X</button>
+                    </div>
+                `;
+                adminVideoList.appendChild(div);
+                div.querySelector('.btn-delete').addEventListener('click', (e) => deleteVideo(e.target.dataset.id));
+            });
+        }
+
+        function deleteVideo(id) {
+            if (confirm('Tem certeza que deseja excluir este vídeo?')) {
+                db.ref(`videos/${id}`).remove()
+                    .then(() => alert('Vídeo excluído!'))
+                    .catch(error => console.error('Erro ao excluir vídeo:', error));
+            }
+        }
+
+        function loadVideosForGallery() {
+            db.ref('videos').on('value', snapshot => {
+                const videosData = snapshot.val();
+                const videosArray = videosData ? Object.entries(videosData).map(([id, data]) => ({ id, ...data })) : [];
+                renderAdminVideos(videosArray);
+                displayPublicVideos(videosArray);
+            });
+        }
+
+        function displayPublicVideos(videos) {
+            videoGallery.innerHTML = '';
+            videos.forEach(video => {
+                videoGallery.innerHTML += `
+                    <div class="video-item">
+                        <iframe src="${video.embedUrl}" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                        <h4>${video.title}</h4>
+                    </div>
+                `;
+            });
+        }
+        
+        // --- Depoimentos Section Logic ---
+        function loadDepoimentosSettings() {
+            db.ref('depoimentosSettings').on('value', snapshot => {
+                const settings = snapshot.val();
+                if (settings) {
+                }
+            });
+            db.ref('depoimentos').on('value', snapshot => {
+                const depoimentosData = snapshot.val();
+                const depoimentosArray = depoimentosData ? Object.entries(depoimentosData).map(([id, data]) => ({ id, ...data })) : [];
+                renderAdminDepoimentos(depoimentosArray);
+                displayPublicDepoimentos(depoimentosArray);
+            });
+        }
+
+        saveDepoimentosTitleBtn.addEventListener('click', () => {
+            const title = adminDepoimentosTitleInput.value;
+            db.ref('depoimentosSettings').set({ depoimentosTitle: title })
+                .then(() => alert('Título dos Depoimentos salvo!'))
+                .catch(error => console.error('Erro ao salvar título:', error));
+        });
+
+        addDepoimentoBtn.addEventListener('click', () => {
+            const text = depoimentoTextInput.value.trim();
+            const author = depoimentoAuthorInput.value.trim();
+                alert('Por favor, preencha o texto e o autor do depoimento.');
+                return;
+            }
+            db.ref('depoimentos').push({ text, author, timestamp: firebase.database.ServerValue.TIMESTAMP })
+                .then(() => {
+                    alert('Depoimento adicionado!');
+                    depoimentoTextInput.value = '';
+                    depoimentoAuthorInput.value = '';
+                })
+                .catch(error => console.error('Erro ao adicionar depoimento:', error));
+        });
+
+        function renderAdminDepoimentos(depoimentos) {
+            adminDepoimentosList.innerHTML = '';
+            depoimentos.forEach(depoimento => {
+                const div = document.createElement('div');
+                div.className = 'depoimento-item-admin';
+                div.innerHTML = `
+                    <p>"${depoimento.text}"<br> - <strong>${depoimento.author}</strong></p>
+                    <div class="item-admin-actions">
+                        <button class="btn-delete" data-id="${depoimento.id}">X</button>
+                    </div>
+                `;
+                adminDepoimentosList.appendChild(div);
+                div.querySelector('.btn-delete').addEventListener('click', (e) => deleteDepoimento(e.target.dataset.id));
+            });
+        }
+
+        function deleteDepoimento(id) {
+            if (confirm('Tem certeza que deseja excluir este depoimento?')) {
+                db.ref(`depoimentos/${id}`).remove()
+                    .then(() => alert('Depoimento excluído!'))
+                    .catch(error => console.error('Erro ao excluir depoimento:', error));
+            }
+        }
+
+        function displayPublicDepoimentos(depoimentos) {
+            depoimentosDisplay.innerHTML = '';
+            depoimentos.forEach(depoimento => {
+                depoimentosDisplay.innerHTML += `
+                    <div class="depoimento-card">
+                        <p class="depoimento-text">"${depoimento.text}"</p>
+                        <p class="depoimento-author">- ${depoimento.author}</p>
+                    </div>
+                `;
+            });
+        }
+
+
+        // --- Initial Load Functions ---
+        function loadAllAdminData() {
+            loadThemeSettings();
+            loadTrilogiaSettings();
+            loadPersonagens(); // Loads for both admin and public
+            loadImagesForGallery(); // Loads for both admin and public
+            loadVideosForGallery(); // Loads for both admin and public
+            loadDepoimentosSettings(); // Loads for both admin and public
+        }
+
+        // --- General Initializations ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadThemeSettings(); // Load theme even if not logged in
+            loadTrilogiaSettings(); // Load trilogia public content
+            loadPersonagens(); // Load personagens public content
+            loadImagesForGallery(); // Load gallery public content
+            loadVideosForGallery(); // Load videos public content
+            loadDepoimentosSettings(); // Load depoimentos public content
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
