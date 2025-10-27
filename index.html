@@ -1,0 +1,1576 @@
+## 💻 **Documento HTML Completo: Equilibrium - Trilogia**
+
+Este é um arquivo HTML completo e funcional com CSS e JavaScript integrados, além da integração com Firebase para um painel administrativo robusto. Você pode copiar e colar este código diretamente em um arquivo `index.html` e fazer o upload para o GitHub Pages.
+
+---
+
+### **Instruções Importantes:**
+
+1.  **Copie TODO o código abaixo.**
+2.  **Salve como `index.html`** em seu computador.
+3.  **Substitua as credenciais do Firebase:**
+    *   Localize a seção `<!-- COLE SUAS CREDENCIAIS DO FIREBASE AQUI -->` no código.
+    *   Cole suas próprias credenciais do Firebase (que você copiou do Firebase Console) no lugar do placeholder.
+4.  **Faça o upload do arquivo `index.html`** para a raiz do seu repositório no GitHub (`alexsandrobeckerab-hub/equilibrium`).
+5.  **Aguarde** alguns minutos para o GitHub Pages atualizar.
+6.  **Acesse seu site:** `https://alexsandrobeckerab-hub.github.io/equilibrium`
+7.  **Senha do Admin:** `admin123` (apenas para este protótipo)
+
+---
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equilibrium - Trilogia Épica | Alex Becker</title>
+    <meta name="description" content="Explore o universo de Sunagori na trilogia de fantasia épica Equilibrium, de Alex Becker. Descubra magia, romance, mistérios e mutações genéticas.">
+    <link rel="icon" href="https://via.placeholder.com/32x32?text=EQ" type="image/x-icon">
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --accent-color: #e94560;
+            --text-color: #e0e0e0;
+            --heading-color: #0f3460;
+            --light-blue: #537fe7;
+            --gold: #FFD700;
+            --gray-light: #f0f0f0;
+            --gray-dark: #333333;
+            --border-color: #0f3460;
+            --card-bg: #212529;
+            --card-hover-bg: #2d3136;
+        }
+
+        /* Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--light-blue);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 2rem; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        section {
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .logo a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            font-weight: 400;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .admin-btn {
+            background-color: var(--heading-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background-color: var(--light-blue);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x800?text=Sunagori+Universe') no-repeat center center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        #hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        #hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Trilogia */
+        #trilogia {
+            background-color: var(--secondary-bg);
+            padding: 5rem 1rem;
+        }
+
+        .trilogia-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .trilogia-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .trilogia-info h2 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .trilogia-info h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .trilogia-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-cover {
+            flex-shrink: 0;
+            width: 300px;
+            height: 450px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Personagens (Simplificado para o exemplo) */
+        #personagens {
+            background-color: var(--primary-bg);
+            padding: 5rem 1rem;
+        }
+
+        .personagens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .personagem-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .personagem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .personagem-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .personagem-card .info {
+            padding: 1.5rem;
+        }
+
+        .personagem-card h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .personagem-card p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Galeria de Fotos */
+        #galeria {
+            background-color: var(--secondary-bg);
+            padding: 5rem 1rem;
+        }
+
+        .filter-buttons {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            background-color: var(--heading-color);
+            color: var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background-color: var(--card-bg);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-color);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .gallery-item:hover .item-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .item-info h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .item-info p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* Seção de Vídeos */
+        #videos {
+            background-color: var(--primary-bg);
+            padding: 5rem 1rem;
+        }
+
+        .video-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tab-button {
+            background-color: var(--heading-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .tab-button:hover, .tab-button.active {
+            background-color: var(--accent-color);
+        }
+
+        .video-content {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-content.active {
+            display: grid;
+        }
+
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-thumbnail-wrapper {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .video-play-icon {
+            opacity: 1;
+        }
+
+        .video-card .info {
+            padding: 1.5rem;
+        }
+
+        .video-card h3 {
+            margin-top: 0;
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-card p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .video-card span {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 0 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Admin Panel Modal */
+        .admin-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .admin-modal.active {
+            display: flex;
+        }
+
+        .admin-content {
+            background-color: var(--secondary-bg);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .admin-content h2 {
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-button {
+            color: var(--text-color);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover {
+            color: var(--accent-color);
+        }
+
+        .admin-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .admin-tabs button {
+            background-color: var(--heading-color);
+            color: var(--text-color);
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .admin-tabs button:hover, .admin-tabs button.active {
+            background-color: var(--accent-color);
+        }
+
+        .admin-tab-content {
+            display: none;
+            padding: 1rem;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .admin-tab-content h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .admin-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            text-align: left;
+        }
+
+        .admin-form input[type="text"],
+        .admin-form input[type="password"],
+        .admin-form input[type="url"],
+        .admin-form textarea,
+        .admin-form select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .admin-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .admin-form button {
+            width: 100%;
+            padding: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .drop-area {
+            border: 2px dashed var(--accent-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .drop-area.highlight {
+            background-color: rgba(var(--accent-color-rgb, 233, 69, 96), 0.1); /* fallback and modern */
+            background-color: rgba(233, 69, 96, 0.1);
+        }
+
+        .drop-area p {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .file-preview {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            display: block;
+            margin: 0.5rem auto;
+            border-radius: 5px;
+        }
+
+        .admin-list {
+            list-style: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .admin-list li {
+            background-color: var(--card-bg);
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-color);
+        }
+
+        .admin-list li span {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
+
+        .admin-list li button {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-list li button:hover {
+            background-color: var(--light-blue);
+        }
+
+        .admin-list li button.delete-btn {
+            background-color: #dc3545;
+        }
+        .admin-list li button.delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .admin-login-form {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .admin-login-form input[type="password"] {
+            margin-bottom: 1rem;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        .admin-login-form button {
+            width: 80%;
+            max-width: 300px;
+        }
+        .admin-error-message {
+            color: #dc3545;
+            margin-top: 1rem;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-menu li {
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+            .hamburger {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1.2rem;
+            }
+            .admin-btn {
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            #hero h1 {
+                font-size: 3rem;
+            }
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .trilogia-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .trilogia-info {
+                text-align: center;
+            }
+            .trilogia-info h2 {
+                font-size: 2.5rem;
+            }
+            .book-cover {
+                width: 250px;
+                height: 375px;
+            }
+
+            .gallery-grid, .video-content {
+                grid-template-columns: 1fr;
+            }
+
+            .item-info {
+                position: static; /* Always visible on mobile */
+                transform: translateY(0%);
+                opacity: 1;
+                background: rgba(0, 0, 0, 0.7);
+            }
+            .gallery-item {
+                background-color: var(--card-bg);
+            }
+
+            .admin-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            .hero-content {
+                padding: 1rem;
+            }
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .filter-btn, .tab-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar container">
+            <div class="logo"><a href="#">Equilibrium</a></div>
+            <div class="hamburger" id="hamburger-menu"><i class="fas fa-bars"></i></div>
+            <nav class="nav-menu" id="nav-menu">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#trilogia">Trilogia</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#videos">Vídeos</a></li>
+            </nav>
+            <button class="admin-btn" id="admin-button">Admin</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Explore Sunagori</h1>
+                <p>Descubra um mundo de tramas, magia, romance e mutações genéticas.</p>
+                <a href="#trilogia" class="btn">Conheça a Trilogia</a>
+            </div>
+        </section>
+
+        <section id="trilogia">
+            <div class="container trilogia-content">
+                <div class="trilogia-info">
+                    <h2>Equilibrium</h2>
+                    <h3>A Trilogia Épica de Alex Becker</h3>
+                    <p>Nesta trilogia de fantasia épica, você mergulhará em um universo repleto de desafios, mistérios e poderes ancestrais. Siga heróis e vilões em suas jornadas por Sunagori, um mundo onde a magia flui e segredos antigos moldam o destino.</p>
+                    <p>Prepare-se para reviravoltas, romances proibidos e batalhas épicas que decidirão o futuro de reinos inteiros. O primeiro livro, "As Correntes do Caos", já disponível!</p>
+                    <a href="#" class="btn">Saiba Mais</a>
+                </div>
+                <img src="https://via.placeholder.com/300x450?text=Capa+Livro+1" alt="Capa do Livro 1: As Correntes do Caos" class="book-cover">
+            </div>
+        </section>
+
+        <!-- Personagens Section (Simplified) -->
+        <section id="personagens">
+            <div class="container">
+                <h2>Alguns Personagens</h2>
+                <div class="personagens-grid">
+                    <!-- Placeholder Characters - will be replaced by Firebase data for now -->
+                    <div class="personagem-card">
+                        <img src="https://via.placeholder.com/300x300?text=Étienne+du+Lac" alt="Étienne du Lac">
+                        <div class="info">
+                            <h3>Étienne du Lac</h3>
+                            <p>O protagonista, um jovem espadachim com um destino misterioso.</p>
+                        </div>
+                    </div>
+                    <div class="personagem-card">
+                        <img src="https://via.placeholder.com/300x300?text=Astrid" alt="Astrid">
+                        <div class="info">
+                            <h3>Astrid</h3>
+                            <p>Uma poderosa maga com um passado sombrio.</p>
+                        </div>
+                    </div>
+                    <div class="personagem-card">
+                        <img src="https://via.placeholder.com/300x300?text=Kaelith" alt="Kaelith">
+                        <div class="info">
+                            <h3>Kaelith</h3>
+                            <p>Líder das Guardas Equilibradoras, determinada e corajosa.</p>
+                        </div>
+                    </div>
+                     <div class="personagem-card">
+                        <img src="https://via.placeholder.com/300x300?text=Jarek" alt="Jarek">
+                        <div class="info">
+                            <h3>Jarek</h3>
+                            <p>Amigo leal e companheiro de Étienne.</p>
+                        </div>
+                    </div>
+                    <div class="personagem-card">
+                        <img src="https://via.placeholder.com/300x300?text=Vesperith" alt="Vesperith">
+                        <div class="info">
+                            <h3>Vesperith</h3>
+                            <p>Uma figura enigmática com poderes ancestrais.</p>
+                        </div>
+                    </div>
+                    <div class="personagem-card">
+                        <img src="https://via.placeholder.com/300x300?text=Mestre+Shin-lo" alt="Mestre Shin-lo">
+                        <div class="info">
+                            <h3>Mestre Shin-lo</h3>
+                            <p>O sábio mestre dos Monges Samurais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="galeria">
+            <div class="container">
+                <h2>Galeria de Sunagori</h2>
+                <div class="filter-buttons" id="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="cenas">Cenas da Trilogia</button>
+                    <button class="filter-btn" data-filter="personagens">Personagens</button>
+                    <button class="filter-btn" data-filter="cenarios">Cenários</button>
+                    <button class="filter-btn" data-filter="magia">Magia</button>
+                    <button class="filter-btn" data-filter="batalhas">Batalhas</button>
+                </div>
+                <div class="gallery-grid" id="gallery-container">
+                    <!-- Gallery items will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="videos">
+            <div class="container">
+                <h2>Vídeos da Trilogia</h2>
+                <div class="video-tabs" id="video-tabs">
+                    <button class="tab-button active" data-tab="trailers">Trailers</button>
+                    <button class="tab-button" data-tab="scenes">Cenas do Livro</button>
+                    <button class="tab-button" data-tab="invites">Convites</button>
+                </div>
+                <div id="video-content-container">
+                    <div id="trailers" class="video-content active">
+                        <!-- Trailer videos will be loaded here by JavaScript -->
+                    </div>
+                    <div id="scenes" class="video-content">
+                        <!-- Scene videos will be loaded here by JavaScript -->
+                    </div>
+                    <div id="invites" class="video-content">
+                        <!-- Invite videos will be loaded here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2023 Equilibrium - Trilogia Épica. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="admin-modal">
+        <div class="admin-content">
+            <span class="close-button">&times;</span>
+            <h2>Painel Administrativo</h2>
+
+            <div id="admin-login-screen">
+                <div class="admin-login-form">
+                    <input type="password" id="admin-password" placeholder="Senha Admin">
+                    <button class="btn" id="admin-login-btn">Entrar</button>
+                    <p class="admin-error-message" id="admin-login-error"></p>
+                </div>
+            </div>
+
+            <div id="admin-dashboard" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="tab-button active" data-tab="photos-admin">Fotos</button>
+                    <button class="tab-button" data-tab="videos-admin">Vídeos</button>
+                    <button class="tab-button" data-tab="settings-admin">Configurações</button>
+                </div>
+
+                <div id="photos-admin" class="admin-tab-content active">
+                    <h3>Adicionar Nova Foto</h3>
+                    <div class="admin-form">
+                        <div class="drop-area" id="drop-area">
+                            <p>Arraste e solte uma imagem aqui, ou clique para selecionar</p>
+                            <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        </div>
+                        <img id="image-preview" class="file-preview" style="display: none;" alt="Preview da Imagem">
+                        <label for="photo-name">Nome da Foto:</label>
+                        <input type="text" id="photo-name" placeholder="Ex: Étienne em Batalha">
+                        <label for="photo-categories">Categorias (separadas por vírgula):</label>
+                        <input type="text" id="photo-categories" placeholder="Ex: cenas,personagens,batalhas">
+                        <button class="btn" id="upload-photo-btn">Adicionar Foto</button>
+                    </div>
+                    <h3>Fotos Cadastradas</h3>
+                    <ul class="admin-list" id="admin-photos-list">
+                        <!-- Photos will be loaded here -->
+                    </ul>
+                </div>
+
+                <div id="videos-admin" class="admin-tab-content">
+                    <h3>Adicionar Novo Vídeo (YouTube)</h3>
+                    <div class="admin-form">
+                        <label for="video-title">Título do Vídeo:</label>
+                        <input type="text" id="video-title" placeholder="Ex: Trailer Oficial">
+                        <label for="video-url">Link do YouTube:</label>
+                        <input type="url" id="video-url" placeholder="Ex: https://www.youtube.com/watch?v=VIDEO_ID">
+                        <label for="video-category">Categoria:</label>
+                        <select id="video-category">
+                            <option value="trailers">Trailers</option>
+                            <option value="scenes">Cenas do Livro</option>
+                            <option value="invites">Convites</option>
+                        </select>
+                        <label for="video-duration">Duração (opcional):</label>
+                        <input type="text" id="video-duration" placeholder="Ex: 2:30 min">
+                        <button class="btn" id="add-video-btn">Adicionar Vídeo</button>
+                    </div>
+                    <h3>Vídeos Cadastrados</h3>
+                    <ul class="admin-list" id="admin-videos-list">
+                        <!-- Videos will be loaded here -->
+                    </ul>
+                </div>
+
+                <div id="settings-admin" class="admin-tab-content">
+                    <h3>Configurações do Admin</h3>
+                    <button class="btn logout-btn" id="admin-logout-btn">Sair</button>
+                    <p style="margin-top: 1rem; text-align: center; font-size: 0.9em; color: var(--text-color);">
+                        (Esta é uma área de protótipo. A senha 'admin123' não é segura para produção.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+    <script>
+        // =====================================================================
+        // COLE SUAS CREDENCIAIS DO FIREBASE AQUI
+        // Você as obteve no Firebase Console (Project settings > Your apps > Web > Config)
+        // Substitua TODO este bloco 'firebaseConfig' pelo seu.
+        // =====================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyATJa6X7dz4BePbTa7V5-norq2uw6TuUxA",
+            authDomain: "equilibrium-alex.firebaseapp.com",
+            databaseURL: "https://equilibrium-alex-default-rtdb.firebaseio.com",
+            projectId: "equilibrium-alex",
+            storageBucket: "equilibrium-alex.firebasestorage.app",
+            messagingSenderId: "930790701881",
+            appId: "1:930790701881:web:cb126e69fd9f10162206e8"
+        };
+        // =====================================================================
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = app.auth();
+        const database = app.database();
+        const storage = app.storage();
+
+        // References to Firebase paths
+        const photosRef = database.ref('photos');
+        const videosRef = database.ref('videos');
+        const storageRef = storage.ref();
+
+        // Global variable for current user
+        let currentUser = null;
+
+        // --- UI Elements ---
+        const navMenu = document.getElementById('nav-menu');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const adminButton = document.getElementById('admin-button');
+        const adminModal = document.getElementById('admin-modal');
+        const closeButton = document.querySelector('.close-button');
+        const adminLoginScreen = document.getElementById('admin-login-screen');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const adminLoginBtn = document.getElementById('admin-login-btn');
+        const adminLoginError = document.getElementById('admin-login-error');
+        const adminDashboard = document.getElementById('admin-dashboard');
+        const adminTabsContainer = document.querySelector('.admin-tabs');
+        const adminTabContents = document.querySelectorAll('.admin-tab-content');
+        const adminLogoutBtn = document.getElementById('admin-logout-btn');
+
+        // Photo Admin Elements
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const imagePreview = document.getElementById('image-preview');
+        const photoNameInput = document.getElementById('photo-name');
+        const photoCategoriesInput = document.getElementById('photo-categories');
+        const uploadPhotoBtn = document.getElementById('upload-photo-btn');
+        const adminPhotosList = document.getElementById('admin-photos-list');
+
+        // Video Admin Elements
+        const videoTitleInput = document.getElementById('video-title');
+        const videoUrlInput = document.getElementById('video-url');
+        const videoCategorySelect = document.getElementById('video-category');
+        const videoDurationInput = document.getElementById('video-duration');
+        const addVideoBtn = document.getElementById('add-video-btn');
+        const adminVideosList = document.getElementById('admin-videos-list');
+
+        // Public Gallery Elements
+        const galleryFilters = document.getElementById('gallery-filters');
+        const galleryContainer = document.getElementById('gallery-container');
+
+        // Public Videos Elements
+        const videoTabs = document.getElementById('video-tabs');
+        const videoContentContainer = document.getElementById('video-content-container');
+        const trailersContainer = document.getElementById('trailers');
+        const scenesContainer = document.getElementById('scenes');
+        const invitesContainer = document.getElementById('invites');
+
+        // --- Event Listeners ---
+
+        // Hamburger Menu
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Admin Modal
+        adminButton.addEventListener('click', () => {
+            adminModal.classList.add('active');
+            adminLoginScreen.style.display = 'block';
+            adminDashboard.style.display = 'none';
+            adminPasswordInput.value = '';
+            adminLoginError.textContent = '';
+        });
+
+        closeButton.addEventListener('click', () => {
+            adminModal.classList.remove('active');
+            // Sign out Firebase user when closing modal
+            if (currentUser) {
+                auth.signOut();
+                currentUser = null;
+            }
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == adminModal) {
+                adminModal.classList.remove('active');
+                if (currentUser) {
+                    auth.signOut();
+                    currentUser = null;
+                }
+            }
+        });
+
+        // Admin Login
+        adminLoginBtn.addEventListener('click', handleAdminLogin);
+        adminPasswordInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                handleAdminLogin();
+            }
+        });
+
+        function handleAdminLogin() {
+            const password = adminPasswordInput.value;
+            const correctPassword = 'admin123'; // FOR PROTOTYPE ONLY!
+
+            if (password === correctPassword) {
+                // Anonymous sign-in for simplicity in prototype
+                auth.signInAnonymously()
+                    .then((userCredential) => {
+                        currentUser = userCredential.user;
+                        adminLoginScreen.style.display = 'none';
+                        adminDashboard.style.display = 'block';
+                        adminLoginError.textContent = '';
+                        loadAdminPhotos();
+                        loadAdminVideos();
+                    })
+                    .catch((error) => {
+                        console.error("Error during anonymous sign-in:", error);
+                        adminLoginError.textContent = 'Erro ao autenticar. Tente novamente.';
+                    });
+            } else {
+                adminLoginError.textContent = 'Senha incorreta.';
+            }
+        }
+
+        adminLogoutBtn.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                currentUser = null;
+                adminLoginScreen.style.display = 'block';
+                adminDashboard.style.display = 'none';
+                adminPasswordInput.value = '';
+                adminLoginError.textContent = '';
+                alert('Sessão encerrada com sucesso.');
+            }).catch((error) => {
+                console.error("Erro ao sair:", error);
+            });
+        });
+
+
+        // Admin Tab Switching
+        adminTabsContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('tab-button')) {
+                const targetTab = event.target.dataset.tab;
+
+                adminTabsContainer.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+
+                adminTabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(targetTab).classList.add('active');
+
+                // Reload data for the active tab
+                if (targetTab === 'photos-admin') {
+                    loadAdminPhotos();
+                } else if (targetTab === 'videos-admin') {
+                    loadAdminVideos();
+                }
+            }
+        });
+
+        // --- Photo Management ---
+        let selectedFile = null;
+
+        // Drag and Drop for Photos
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropArea.classList.add('highlight');
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('highlight');
+        });
+
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropArea.classList.remove('highlight');
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        dropArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            handleFile(event.target.files[0]);
+        });
+
+        function handleFile(file) {
+            if (file && file.type.startsWith('image/')) {
+                selectedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Por favor, selecione um arquivo de imagem válido.');
+                selectedFile = null;
+                imagePreview.style.display = 'none';
+            }
+        }
+
+        uploadPhotoBtn.addEventListener('click', uploadPhoto);
+
+        function uploadPhoto() {
+            if (!currentUser) {
+                alert('Você não está logado como admin.');
+                return;
+            }
+            if (!selectedFile) {
+                alert('Por favor, selecione uma imagem para upload.');
+                return;
+            }
+
+            const name = photoNameInput.value.trim();
+            const categories = photoCategoriesInput.value.toLowerCase().split(',').map(c => c.trim()).filter(c => c !== '');
+
+            if (!name || categories.length === 0) {
+                alert('Por favor, preencha o nome e pelo menos uma categoria para a foto.');
+                return;
+            }
+
+            const fileName = Date.now() + '_' + selectedFile.name;
+            const photoStorageRef = storageRef.child('photos/' + fileName);
+
+            photoStorageRef.put(selectedFile).then((snapshot) => {
+                snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    photosRef.push({
+                        name: name,
+                        categories: categories,
+                        url: downloadURL,
+                        fileName: fileName,
+                        timestamp: Date.now()
+                    });
+                    alert('Foto adicionada com sucesso!');
+                    // Clear form
+                    photoNameInput.value = '';
+                    photoCategoriesInput.value = '';
+                    selectedFile = null;
+                    imagePreview.style.display = 'none';
+                    loadAdminPhotos(); // Reload list
+                });
+            }).catch((error) => {
+                console.error("Erro ao fazer upload da foto:", error);
+                alert('Erro ao adicionar foto. Verifique o console.');
+            });
+        }
+
+        function loadAdminPhotos() {
+            adminPhotosList.innerHTML = '';
+            photosRef.on('value', (snapshot) => {
+                adminPhotosList.innerHTML = ''; // Clear previous entries
+                snapshot.forEach((childSnapshot) => {
+                    const photo = childSnapshot.val();
+                    const key = childSnapshot.key;
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${photo.name} (${photo.categories.join(', ')})</span>
+                        <button data-key="${key}" class="edit-photo-btn btn">Editar</button>
+                        <button data-key="${key}" data-filename="${photo.fileName}" class="delete-photo-btn btn delete-btn">Excluir</button>
+                    `;
+                    adminPhotosList.appendChild(li);
+                });
+            });
+        }
+
+        adminPhotosList.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete-photo-btn')) {
+                const key = event.target.dataset.key;
+                const fileName = event.target.dataset.filename;
+                if (confirm('Tem certeza que deseja excluir esta foto?')) {
+                    // Delete from Storage
+                    storageRef.child('photos/' + fileName).delete().then(() => {
+                        // Delete from Realtime Database
+                        photosRef.child(key).remove();
+                        alert('Foto excluída com sucesso!');
+                    }).catch((error) => {
+                        console.error("Erro ao excluir foto:", error);
+                        alert('Erro ao excluir foto. Verifique o console.');
+                    });
+                }
+            }
+            // Edit functionality can be added here
+        });
+
+        // --- Video Management ---
+        addVideoBtn.addEventListener('click', addVideo);
+
+        function addVideo() {
+            if (!currentUser) {
+                alert('Você não está logado como admin.');
+                return;
+            }
+            const title = videoTitleInput.value.trim();
+            const url = videoUrlInput.value.trim();
+            const category = videoCategorySelect.value;
+            const duration = videoDurationInput.value.trim();
+
+            if (!title || !url || !category) {
+                alert('Por favor, preencha o título, URL e categoria do vídeo.');
+                return;
+            }
+
+            const youtubeId = getYouTubeVideoId(url);
+            if (!youtubeId) {
+                alert('URL do YouTube inválida. Por favor, insira uma URL válida.');
+                return;
+            }
+
+            videosRef.push({
+                title: title,
+                url: url,
+                youtubeId: youtubeId,
+                category: category,
+                duration: duration,
+                timestamp: Date.now()
+            });
+
+            alert('Vídeo adicionado com sucesso!');
+            // Clear form
+            videoTitleInput.value = '';
+            videoUrlInput.value = '';
+            videoDurationInput.value = '';
+            videoCategorySelect.value = 'trailers';
+            loadAdminVideos(); // Reload list
+        }
+
+        function getYouTubeVideoId(url) {
+            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+            const match = url.match(regex);
+            return (match && match[1]) ? match[1] : null;
+        }
+
+        function loadAdminVideos() {
+            adminVideosList.innerHTML = '';
+            videosRef.on('value', (snapshot) => {
+                adminVideosList.innerHTML = ''; // Clear previous entries
+                snapshot.forEach((childSnapshot) => {
+                    const video = childSnapshot.val();
+                    const key = childSnapshot.key;
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${video.title} (${video.category})</span>
+                        <button data-key="${key}" class="edit-video-btn btn">Editar</button>
+                        <button data-key="${key}" class="delete-video-btn btn delete-btn">Excluir</button>
+                    `;
+                    adminVideosList.appendChild(li);
+                });
+            });
+        }
+
+        adminVideosList.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete-video-btn')) {
+                const key = event.target.dataset.key;
+                if (confirm('Tem certeza que deseja excluir este vídeo?')) {
+                    videosRef.child(key).remove();
+                    alert('Vídeo excluído com sucesso!');
+                }
+            }
+            // Edit functionality can be added here
+        });
+
+
+        // --- Public Gallery Display ---
+        galleryFilters.addEventListener('click', (event) => {
+            if (event.target.classList.contains('filter-btn')) {
+                galleryFilters.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                const filter = event.target.dataset.filter;
+                renderPhotos(filter);
+            }
+        });
+
+        function renderPhotos(filter = 'all') {
+            galleryContainer.innerHTML = '';
+            photosRef.on('value', (snapshot) => {
+                galleryContainer.innerHTML = ''; // Clear previous entries
+                snapshot.forEach((childSnapshot) => {
+                    const photo = childSnapshot.val();
+                    if (filter === 'all' || photo.categories.includes(filter)) {
+                        const div = document.createElement('div');
+                        div.classList.add('gallery-item');
+                        div.innerHTML = `
+                            <img src="${photo.url}" alt="${photo.name}">
+                            <div class="item-info">
+                                <h3>${photo.name}</h3>
+                                <p>Categoria: ${photo.categories.join(', ')}</p>
+                            </div>
+                        `;
+                        galleryContainer.appendChild(div);
+                    }
+                });
+            });
+        }
+
+        // --- Public Videos Display ---
+        videoTabs.addEventListener('click', (event) => {
+            if (event.target.classList.contains('tab-button')) {
+                videoTabs.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                const targetTab = event.target.dataset.tab;
+
+                document.querySelectorAll('.video-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(targetTab).classList.add('active');
+                renderVideos(targetTab);
+            }
+        });
+
+        function renderVideos(category = 'trailers') {
+            trailersContainer.innerHTML = '';
+            scenesContainer.innerHTML = '';
+            invitesContainer.innerHTML = '';
+
+            videosRef.on('value', (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    const video = childSnapshot.val();
+                    if (video.category === category) {
+                        const div = document.createElement('div');
+                        div.classList.add('video-card');
+                        div.innerHTML = `
+                            <a href="https://www.youtube.com/watch?v=${video.youtubeId}" target="_blank" class="video-thumbnail-wrapper">
+                                <img src="https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg" alt="${video.title}">
+                                <i class="fas fa-play video-play-icon"></i>
+                            </a>
+                            <div class="info">
+                                <h3>${video.title}</h3>
+                                <p>${video.duration ? `Duração: ${video.duration}` : ''}</p>
+                            </div>
+                        `;
+                        if (category === 'trailers') trailersContainer.appendChild(div);
+                        if (category === 'scenes') scenesContainer.appendChild(div);
+                        if (category === 'invites') invitesContainer.appendChild(div);
+                    }
+                });
+            });
+        }
+
+        // Initial render for public sections
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPhotos('all');
+            renderVideos('trailers');
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active'); // Close mobile menu after click
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
