@@ -1069,15 +1069,24 @@
         // Você as obteve no Firebase Console (Project settings > Your apps > Web > Config)
         // Substitua TODO este bloco 'firebaseConfig' pelo seu.
         // =====================================================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyD-o0hS692HW7F_13p8cPPS8TWfkIPf90c",
-            authDomain: "equilibrium-alex-2.firebaseapp.com",
-            databaseURL: "https://equilibrium-alex-2-default-rtdb.firebaseio.com",
-            projectId: "equilibrium-alex-2",
-            storageBucket: "equilibrium-alex-2.firebasestorage.app",
-            messagingSenderId: "684128804738",
-            appId: "1:684128804738:web:a9ba266b2a53d82bc7799b"
-        };
+        // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyD-o0hS692HW7F_13p8cPPS8TWfkIPf90c",
+  authDomain: "equilibrium-alex-2.firebaseapp.com",
+  databaseURL: "https://equilibrium-alex-2-default-rtdb.firebaseio.com",
+  projectId: "equilibrium-alex-2",
+  storageBucket: "equilibrium-alex-2.firebasestorage.app",
+  messagingSenderId: "684128804738",
+  appId: "1:684128804738:web:a9ba266b2a53d82bc7799b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
         // =====================================================================
 
         // Initialize Firebase
@@ -1493,3 +1502,4 @@
 </body>
 
 </html>
+
